@@ -17,12 +17,12 @@ public class Banatzailea {
     /**
      * Banatzailearen informazioa gordetzeko konstruktorea.
      *
-     * @param id            Banatzailearen ID-a.
-     * @param izena         Banatzailearen izena.
-     * @param abizena       Banatzailearen abizena.
-     * @param erabiltzailea Banatzailearen erabiltzailearen izena.
-     * @param pasahitza     Banatzailearen pasahitza.
-     * @param entregak      Banatzailearen entregak.
+     * @param id              Banatzailearen ID-a.
+     * @param izena           Banatzailearen izena.
+     * @param abizena         Banatzailearen abizena.
+     * @param erabiltzailea   Banatzailearen erabiltzailearen izena.
+     * @param pasahitza       Banatzailearen pasahitza.
+     * @param entregak        Banatzailearen entregak.
      * @param beranduEntregak Banatzailearen berandu entregak.
      */
     public Banatzailea(int id, String izena, String abizena, String erabiltzailea, String pasahitza, int entregak, int beranduEntregak) {
@@ -115,6 +115,7 @@ public class Banatzailea {
     public String getPasahitza() {
         return pasahitza;
     }
+
     /**
      * Metodo honek pertsonaren pasahitza ezartzen du.
      *
