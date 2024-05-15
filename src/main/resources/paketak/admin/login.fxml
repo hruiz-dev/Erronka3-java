@@ -11,12 +11,12 @@
          <children>
             <AnchorPane prefHeight="405.0" prefWidth="250.0" styleClass="imgBackground" stylesheets="@../../styles.css">
                <children>
-                  <Label layoutX="24.0" layoutY="63.0" text="Erabiltzailea">
+                  <Label layoutX="24.0" layoutY="63.0" text="Erabiltzailea" textFill="#c9c9c9">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="24.0" layoutY="138.0" text="Pasahitza">
+                  <Label layoutX="24.0" layoutY="138.0" text="Pasahitza" textFill="#c9c9c9">
                      <font>
                         <Font size="16.0" />
                      </font>
