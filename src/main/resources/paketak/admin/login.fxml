@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../styles.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.loginKontrolatzailea">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="20.0">
+         <children>
+            <AnchorPane prefHeight="405.0" prefWidth="250.0" styleClass="imgBackground" stylesheets="@../../styles.css">
+               <children>
+                  <Label layoutX="24.0" layoutY="63.0" text="Erabiltzailea">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="24.0" layoutY="138.0" text="Pasahitza">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="erabiltzaileaText" layoutX="24.0" layoutY="88.0" prefHeight="25.0" prefWidth="202.0" promptText="Erabiltzailea" styleClass="textField" stylesheets="@../../styles.css" />
+                  <PasswordField fx:id="pasahitzaText" layoutX="24.0" layoutY="163.0" prefHeight="25.0" prefWidth="202.0" promptText="pasahitza" />
+                  <Button layoutX="20.0" layoutY="295.0" mnemonicParsing="false" onAction="#hasiSaioa" prefHeight="46.0" prefWidth="210.0" text="Hasi saioa" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="242.0" layoutY="5.0" prefHeight="400.0" prefWidth="351.0">
+               <children>
+                  <ImageView fitHeight="347.0" fitWidth="349.0" layoutX="8.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@irudiak/empresaLogo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

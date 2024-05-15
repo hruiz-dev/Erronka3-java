@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <BorderPane prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <AnchorPane prefHeight="45.0" prefWidth="200.0" stylesheets="@../../styles.css" BorderPane.alignment="CENTER" />
+               </top>
+               <left>
+                  <AnchorPane prefHeight="951.0" prefWidth="201.0" styleClass="imgBackground" stylesheets="@../../styles.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <ImageView fitHeight="122.0" fitWidth="91.0" layoutX="55.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@irudiak/empresaLogo.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="11.0" layoutY="109.0" lineSpacing="3.0" styleClass="kudeatzaileText" stylesheets="@../../dashboard.css" text="Kaixo Kudeatzailea" textAlignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="41.0" layoutY="153.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" styleClass="menuButtom" stylesheets="@../../dashboard.css" text="Etxea" />
+                        <Button layoutX="41.0" layoutY="187.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" styleClass="menuButtom" stylesheets="@../../dashboard.css" text="Banatzaileak" textAlignment="CENTER" />
+                        <Button layoutX="41.0" layoutY="221.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="118.0" styleClass="menuButtom" stylesheets="@../../dashboard.css" text="Paketeak" />
+                        <Line endX="100.0" layoutX="100.0" layoutY="153.0" startX="-100.0" stroke="#bf212e" />
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="datuPanela" stylesheets="@../../dashboard.css" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
