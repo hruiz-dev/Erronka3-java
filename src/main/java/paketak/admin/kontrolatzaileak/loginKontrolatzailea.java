@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import paketak.admin.Main;
+import paketak.admin.modeloak.Paketea;
+
+import java.util.ArrayList;
 
 public class loginKontrolatzailea {
 
@@ -17,6 +20,13 @@ public class loginKontrolatzailea {
             System.out.println("Saioa hasi da");
             Main a = new Main();
             a.changeScene("dashboard.fxml");
+
+            ArrayList<Paketea> zerrenda = DashboardKontrolatzailea.getPaketeak();
+
+            for(int i = 0; i<zerrenda.size(); i++){
+                System.out.println(zerrenda.get(i).getHartzailea());
+            }
+
         } else {
             System.out.println("Erabiltzaile edo pasahitza okerra");
         }
