@@ -1,11 +1,15 @@
 package paketak.admin.kontrolatzaileak;
 
 import paketak.admin.modeloak.Paketea;
+import paketak.admin.zerbitzuak.MysqlConector;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DashboardKontrolatzailea {
+
+    private static MysqlConector mysql = MysqlConector.getInstance();
+
     public void showPanel(){
         System.out.println("Show panel sakatuta");
     }
@@ -13,17 +17,9 @@ public class DashboardKontrolatzailea {
     public static ArrayList<Paketea> getPaketeak(){
         ArrayList<Paketea> zerrenda = new ArrayList<Paketea>();
 
-        String url = "jdbc:mysql://10.23.25.174:3306/pakAG";
-        String usuario = "root";
-        String contraseña = "root";
+        ResultSet emaitza = mysql.createQuery("SELECT * FROM `Paketea`");
 
-        try (Connection conexion = DriverManager.getConnection(url, usuario, contraseña)) {
-
-            Statement sententzia = conexion.createStatement();
-
-            String kontsulta = "SELECT * FROM `Paketea`";
-
-            ResultSet emaitza = sententzia.executeQuery(kontsulta);
+        try {
 
             while (emaitza.next()) {
 
@@ -39,11 +35,8 @@ public class DashboardKontrolatzailea {
                 zerrenda.add(paketea);
 
             }
-
-            emaitza.close();
-            sententzia.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return zerrenda;
