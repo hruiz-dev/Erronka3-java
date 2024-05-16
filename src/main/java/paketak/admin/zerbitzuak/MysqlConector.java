@@ -133,11 +133,17 @@ public class MysqlConector {
         PreparedStatement ps = connection.prepareStatement(query);
         int i = 0;
 
-         do {
-            String datu = datuak.substring(0, datuak.indexOf(","));
+        do {
+            String datu;
+            if (datuak.contains(",")) {
+                datu = datuak.substring(0, datuak.indexOf(","));
+                datuak = datuak.substring(datuak.indexOf(",") + 1);
+            } else {
+                datu = datuak;
+                datuak = "";
+            }
             ps.setString(++i, datu);
-            datuak = datuak.substring(datuak.indexOf(",") + 1);
-        } while (datuak.contains(","));
+        } while (!datuak.isEmpty());
 
         return ps;
     }
