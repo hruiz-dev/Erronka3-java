@@ -1,5 +1,6 @@
 package paketak.admin.modeloak;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,6 +14,8 @@ public class Paketea {
     private boolean entregatuta;
     private String helburua;
     private String jatorria;
+
+    private static ArrayList<Paketea> paketeak = new ArrayList<Paketea>();
 
     /**
      * Eraikitzailea. Paketearen atributuak ezartzen ditu.
@@ -159,5 +162,23 @@ public class Paketea {
      */
     public void setJatorria(String jatorria) {
         this.jatorria = jatorria;
+    }
+
+    /**
+     * Metodo honek paketeen zerrenda itzultzen du.
+     *
+     * @return paketeen zerrenda
+     */
+    public static ArrayList<Paketea> getPaketeak() {
+        return paketeak;
+    }
+
+    /**
+     * Metodo honek paketeen zerrenda ezartzen du.
+     *
+     * @param paketeak paketeen zerrenda
+     */
+    public static void setPaketeak(ArrayList<Paketea> paketeak) {
+        Paketea.paketeak = paketeak;
     }
 }

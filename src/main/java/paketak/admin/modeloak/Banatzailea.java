@@ -1,18 +1,24 @@
 package paketak.admin.modeloak;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Banatzailearen informazioa gordetzeko klasea.
  *
  * @author Hegoi eta Unax
  */
 public class Banatzailea {
-    public int id;
-    public String izena;
-    public String abizena;
-    public String erabiltzailea;
-    public String pasahitza;
-    public int entregak;
-    public int beranduEntregak;
+    private int id;
+    private String izena;
+    private String abizena;
+    private String erabiltzailea;
+    private String pasahitza;
+    private int entregak;
+    private int beranduEntregak;
+
+    public static ArrayList<Banatzailea> banatzaileak = new ArrayList<Banatzailea>();
 
     /**
      * Banatzailearen informazioa gordetzeko konstruktorea.
@@ -159,5 +165,22 @@ public class Banatzailea {
      */
     public void setBeranduEntregak(int beranduEntregak) {
         this.beranduEntregak = beranduEntregak;
+    }
+
+    /**
+     * Funtzio honek banatzaileak itzultzen ditu.
+     *
+     * @return banatzaileak
+     */
+    public static ArrayList<Banatzailea> getBanatzaileak() {
+        return banatzaileak;
+    }
+
+    /**
+     * Funtzio honek banatzaileak ezartzen ditu.
+     * @param banatzaileak banatzaileak
+     */
+    public static void setBanatzaileak(ArrayList<Banatzailea> banatzaileak) {
+        Banatzailea.banatzaileak = banatzaileak;
     }
 }

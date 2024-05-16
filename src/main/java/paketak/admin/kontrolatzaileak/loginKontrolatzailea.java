@@ -18,10 +18,12 @@ public class loginKontrolatzailea {
     public void hasiSaioa() {
         if (erabiltzaileaText.getText().equals("admin") && pasahitzaText.getText().equals("admin")) {
             System.out.println("Saioa hasi da");
+            ArrayList<Paketea> zerrenda = DashboardKontrolatzailea.getPaketeak();
+            Paketea.setPaketeak(zerrenda);
+
             Main a = new Main();
             a.changeScene("dashboard.fxml");
 
-            ArrayList<Paketea> zerrenda = DashboardKontrolatzailea.getPaketeak();
 
             for(int i = 0; i<zerrenda.size(); i++){
                 System.out.println(zerrenda.get(i).getHartzailea());

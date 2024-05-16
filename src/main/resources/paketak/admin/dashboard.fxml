@@ -121,22 +121,9 @@
                               <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
                            </padding>
                         </GridPane>
-                        <ToolBar prefHeight="35.0" prefWidth="1398.0">
-                           <items>
-                              <Label text="Entregatze data:" />
-                              <DatePicker />
-                              <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="6.0" />
-                              <Label text="Bilatu:" />
-                              <TextField />
-                              <Button mnemonicParsing="false" text="Button" />
-                           </items>
-                        </ToolBar>
-                        <TableView>
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="C1" />
-                              <TableColumn prefWidth="75.0" text="C2" />
-                           </columns>
-                        </TableView>
+                        <AnchorPane prefHeight="699.0" prefWidth="1399.0">
+                           <fx:include source="panelHasiera.fxml" />
+                        </AnchorPane>
                      </children>
                   </VBox>
                </center>

@@ -1,5 +1,6 @@
 package paketak.admin.kontrolatzaileak;
 
+import paketak.admin.modeloak.Banatzailea;
 import paketak.admin.modeloak.Paketea;
 import paketak.admin.zerbitzuak.MysqlConector;
 
@@ -33,7 +34,6 @@ public class DashboardKontrolatzailea {
 
                 Paketea paketea = new Paketea(id, entregaEginBeharData, hartzailea, dimentsioak, entregatuta, helburua, jatorria);
                 zerrenda.add(paketea);
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
