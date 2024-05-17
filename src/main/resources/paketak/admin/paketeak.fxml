@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="700.0" prefWidth="600.0">
+               <children>
+                  <TableView layoutY="100.0" prefHeight="600.0" prefWidth="600.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <ToolBar layoutY="60.0" prefHeight="40.0" prefWidth="600.0">
+                     <contextMenu>
+                        <ContextMenu>
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu>
+                     <items>
+                        <TextField />
+                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="42.0">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@irudiak/bilatu.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <SplitMenuButton mnemonicParsing="false" prefHeight="31.0" prefWidth="72.0" text="ID">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Izena" />
+                            <MenuItem mnemonicParsing="false" text="Abizena" />
+                          </items>
+                        </SplitMenuButton>
+                        <Button mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@irudiak/reload.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToolBar>
+                  <Label text="Administratu Paketeak">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="599.0" prefHeight="700.0" prefWidth="800.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="96.0" prefHeight="17.0" prefWidth="78.0" text="Id" />
+                  <Label layoutX="21.0" layoutY="136.0" prefHeight="17.0" prefWidth="78.0" text="Entrega Data" />
+                  <Label layoutX="23.0" layoutY="176.0" prefHeight="17.0" prefWidth="78.0" text="Hartzailea" />
+                  <Label layoutX="23.0" layoutY="219.0" prefHeight="17.0" prefWidth="78.0" text="Dimesioak" />
+                  <Label layoutX="21.0" layoutY="264.0" prefHeight="17.0" prefWidth="78.0" text="Entregatuta" />
+                  <Label layoutX="21.0" layoutY="302.0" prefHeight="17.0" prefWidth="78.0" text="Helburua" />
+                  <Label layoutX="23.0" layoutY="342.0" prefHeight="17.0" prefWidth="78.0" text="Jatorria" />
+                  <Button layoutX="75.0" layoutY="617.0" minWidth="72.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Ezabatu" />
+                  <Button layoutX="250.0" layoutY="617.0" minWidth="72.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Gorde aldaketak" />
+                  <Button layoutX="681.0" layoutY="617.0" minWidth="72.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Berria" />
+                  <TextField layoutX="167.0" layoutY="92.0" />
+                  <TextField layoutX="167.0" layoutY="132.0" />
+                  <TextField layoutX="167.0" layoutY="172.0" />
+                  <TextField layoutX="167.0" layoutY="215.0" />
+                  <TextField layoutX="167.0" layoutY="260.0" />
+                  <TextField layoutX="167.0" layoutY="298.0" />
+                  <TextField layoutX="167.0" layoutY="338.0" />
+                  <Button layoutX="482.0" layoutY="617.0" minWidth="72.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Garbitu" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

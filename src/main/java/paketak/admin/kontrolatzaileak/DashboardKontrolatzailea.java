@@ -2,7 +2,6 @@ package paketak.admin.kontrolatzaileak;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import paketak.admin.modeloak.Banatzailea;
 import paketak.admin.modeloak.Paketea;
 import paketak.admin.zerbitzuak.MysqlConector;
 
@@ -28,12 +27,14 @@ public class DashboardKontrolatzailea {
     public static ArrayList<Paketea> getPaketeak(){
         ArrayList<Paketea> zerrenda = new ArrayList<Paketea>();
 
+        // Sql kontsulta egin
         ResultSet emaitza = mysql.createQuery("SELECT * FROM `Paketea` \n" +
                 "WHERE `entrega_egin_beharreko_data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 10 DAY) \n" +
                 "ORDER BY `entrega_egin_beharreko_data` ASC;");
 
         try {
 
+            // Kkontsultatik datuak objetuera ppasa eta hauek zeernda batean gorde
             while (emaitza.next()) {
 
                 int id = emaitza.getInt("id");
@@ -58,16 +59,20 @@ public class DashboardKontrolatzailea {
      * Funtzio honek datu basean dauden pakete kopurua eta laister banatu behar diren pakete kopurua aktulizatzen du interfazean
      */
     public void aktualizatuPaketeDatuak(){
+
+        // Sql kontsultak egin
         ResultSet paketeak = mysql.createQuery("SELECT COUNT(*) FROM `Paketea` WHERE `Banatzailea_id` IS NULL");
 
+        ResultSet banatzekoak = mysql.createQuery("SELECT COUNT(*) FROM `Paketea` \n" +
+                "WHERE `entrega_egin_beharreko_data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 10 DAY) \n" +
+                "ORDER BY `entrega_egin_beharreko_data` ASC;");
+
         try {
+            // Kontsultaren emaitzak lortu eta interfazearen labelak aktulizatu
             if (paketeak.next()) {
                 int count = paketeak.getInt(1);
                 banatzekopaketeak.setText(Integer.toString(count));
             }
-            ResultSet banatzekoak = mysql.createQuery("SELECT COUNT(*) FROM `Paketea` \n" +
-                    "WHERE `entrega_egin_beharreko_data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 10 DAY) \n" +
-                    "ORDER BY `entrega_egin_beharreko_data` ASC;");
 
             if (banatzekoak.next()) {
                 int count = banatzekoak.getInt(1);
