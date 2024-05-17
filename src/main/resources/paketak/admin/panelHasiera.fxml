@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +11,17 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="datuPanela" stylesheets="@../../dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelHasieraKontrolatzailea">
    <children>
-      <TableView fx:id="paketeTabla" layoutX="7.0" layoutY="153.0" prefHeight="643.0" prefWidth="1394.0" />
+       <TableView fx:id="paketeTabla" layoutX="7.0" layoutY="153.0" prefHeight="643.0" prefWidth="1394.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="195.0" text="ID" />
+                <TableColumn fx:id="entregaEginBeharDataColumn" prefWidth="200.0" text="Entrega Egin Behar Data" />
+                <TableColumn fx:id="hartzaileaColumn" minWidth="2.0" prefWidth="200.0" text="Hartzailea" />
+                <TableColumn fx:id="dimentsioakColumn" minWidth="9.0" prefWidth="200.0" text="Dimentsioak" />
+                <TableColumn fx:id="entregatutaColumn" minWidth="0.0" prefWidth="200.0" text="Entregatuta" />
+                <TableColumn fx:id="helburuaColumn" minWidth="9.0" prefWidth="200.0" text="Helburua" />
+                <TableColumn fx:id="jatorriaColumn" prefWidth="200.0" text="Jatorria" />
+            </columns>
+        </TableView>
       <ToolBar layoutX="14.0" layoutY="113.0" prefHeight="40.0" prefWidth="1387.0">
         <items>
             <Label text="Entregatze data:" />

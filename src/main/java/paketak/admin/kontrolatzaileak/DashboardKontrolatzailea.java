@@ -11,6 +11,9 @@ public class DashboardKontrolatzailea {
 
     private static MysqlConector mysql = MysqlConector.getInstance();
 
+    public void initialize(){
+    }
+
     public void showPanel(){
         System.out.println("Show panel sakatuta");
     }

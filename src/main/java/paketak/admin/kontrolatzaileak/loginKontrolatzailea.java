@@ -18,16 +18,9 @@ public class loginKontrolatzailea {
     public void hasiSaioa() {
         if (erabiltzaileaText.getText().equals("admin") && pasahitzaText.getText().equals("admin")) {
             System.out.println("Saioa hasi da");
-            ArrayList<Paketea> zerrenda = DashboardKontrolatzailea.getPaketeak();
-            Paketea.setPaketeak(zerrenda);
 
             Main a = new Main();
             a.changeScene("dashboard.fxml");
-
-
-            for(int i = 0; i<zerrenda.size(); i++){
-                System.out.println(zerrenda.get(i).getHartzailea());
-            }
 
         } else {
             System.out.println("Erabiltzaile edo pasahitza okerra");
