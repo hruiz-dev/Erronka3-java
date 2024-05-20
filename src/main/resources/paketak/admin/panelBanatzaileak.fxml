@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -14,19 +15,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="813.0" prefWidth="1334.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelBanatzaileakKontrolatzailea">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="933.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelBanatzaileakKontrolatzailea">
    <children>
       <Label text="Banatzaileak">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <HBox prefHeight="727.0" prefWidth="1205.0">
-         <children>
+      <SplitPane dividerPositions="0.75" prefHeight="762.0" prefWidth="1334.0">
+         <items>
             <VBox prefHeight="602.0" prefWidth="742.0">
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="600.0">
@@ -68,7 +68,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ToolBar>
-                  <TableView fx:id="banatzaileakTaula" prefHeight="561.0" prefWidth="848.0">
+                  <TableView fx:id="banatzaileakTaula" prefHeight="700.0" prefWidth="736.0">
                     <columns>
                       <TableColumn fx:id="idColumn" prefWidth="75.0" />
                       <TableColumn fx:id="izena" prefWidth="169.0" text="Izena" />
@@ -81,9 +81,9 @@
                   </TableView>
                </children>
             </VBox>
-            <VBox prefHeight="635.0" prefWidth="399.0">
+            <VBox prefHeight="741.0" prefWidth="228.0">
                <children>
-                  <AnchorPane prefHeight="602.0" prefWidth="544.0">
+                  <AnchorPane prefHeight="0.0" prefWidth="0.0">
                      <children>
                         <Label layoutX="21.0" layoutY="96.0" prefHeight="17.0" prefWidth="78.0" text="Id" />
                         <Label layoutX="21.0" layoutY="136.0" prefHeight="17.0" prefWidth="78.0" text="Entrega Data" />
@@ -107,9 +107,8 @@
                   </AnchorPane>
                </children>
             </VBox>
-         </children>
-      </HBox>
-      <AnchorPane prefHeight="200.0" prefWidth="1343.0" />
+         </items>
+      </SplitPane>
    </children>
    <opaqueInsets>
       <Insets />
