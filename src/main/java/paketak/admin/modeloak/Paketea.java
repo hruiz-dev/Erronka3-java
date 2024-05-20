@@ -11,7 +11,7 @@ public class Paketea {
     private Date entregaEginBeharData;
     private String hartzailea;
     private String dimentsioak;
-    private boolean entregatuta;
+    private boolean entregatzen;
     private String helburua;
     private String jatorria;
 
@@ -24,16 +24,16 @@ public class Paketea {
      * @param entregaEginBeharData  paketea entregatu behar den data
      * @param hartzailea            paketearen hartzailearen izena
      * @param dimentsioak           paketearen dimentsioak
-     * @param entregatuta           egiaztatzen du ea paketea entregatuta dagoen edo ez
+     * @param entregatzen           egiaztatzen du ea paketea entregatzen dagoen edo ez
      * @param helburua              paketearen helburua
      * @param jatorria              paketearen jatorriaren izena
      */
-    public Paketea(int id, Date entregaEginBeharData, String hartzailea, String dimentsioak, boolean entregatuta, String helburua, String jatorria) {
+    public Paketea(int id, Date entregaEginBeharData, String hartzailea, String dimentsioak, boolean entregatzen, String helburua, String jatorria) {
         this.id = id;
         this.entregaEginBeharData = entregaEginBeharData;
         this.hartzailea = hartzailea;
         this.dimentsioak = dimentsioak;
-        this.entregatuta = entregatuta;
+        this.entregatzen = entregatzen;
         this.helburua = helburua;
         this.jatorria = jatorria;
     }
@@ -115,17 +115,17 @@ public class Paketea {
      *
      * @return ea paketea entregatuta dagoen edo ez
      */
-    public boolean isEntregatuta() {
-        return entregatuta;
+    public boolean getEntregatzen() {
+        return entregatzen;
     }
 
     /**
-     * Metodo honek paketearen entregatuta baldintza ezartzen du.
+     * Metodo honek paketearen entregatzen baldintza ezartzen du.
      *
-     * @param entregatuta ea paketea entregatuta dagoen edo ez
+     * @param entregatzen ea paketea entregatzen dagoen edo ez
      */
-    public void setEntregatuta(boolean entregatuta) {
-        this.entregatuta = entregatuta;
+    public void setEntregatzen(boolean entregatzen) {
+        this.entregatzen = entregatzen;
     }
 
     /**

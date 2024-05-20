@@ -25,7 +25,7 @@ public class PanelHasieraKontrolatzailea {
     @FXML
     private TableColumn<Paketea, String> dimentsioakColumn;
     @FXML
-    private TableColumn<Paketea, Boolean> entregatutaColumn;
+    private TableColumn<Paketea, Boolean> entregatzenColumn;
     @FXML
     private TableColumn<Paketea, String> helburuaColumn;
     @FXML
@@ -37,7 +37,7 @@ public class PanelHasieraKontrolatzailea {
         entregaEginBeharDataColumn.setCellValueFactory(new PropertyValueFactory<>("entregaEginBeharData"));
         hartzaileaColumn.setCellValueFactory(new PropertyValueFactory<>("hartzailea"));
         dimentsioakColumn.setCellValueFactory(new PropertyValueFactory<>("dimentsioak"));
-        entregatutaColumn.setCellValueFactory(new PropertyValueFactory<>("entregatuta"));
+        entregatzenColumn.setCellValueFactory(new PropertyValueFactory<>("entregatzen"));
         helburuaColumn.setCellValueFactory(new PropertyValueFactory<>("helburua"));
         jatorriaColumn.setCellValueFactory(new PropertyValueFactory<>("jatorria"));
 

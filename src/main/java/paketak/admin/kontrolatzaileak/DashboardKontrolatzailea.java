@@ -41,12 +41,14 @@ public class DashboardKontrolatzailea {
                 Date entregaEginBeharData = emaitza.getDate("entrega_egin_beharreko_data");
                 String hartzailea = emaitza.getString("hartzailea");
                 String dimentsioak = emaitza.getString("dimensioak");
-                boolean entregatuta = emaitza.getBoolean("entregatuta");
+                boolean entregatzen = emaitza.getBoolean("entregatzen");
                 String helburua = emaitza.getString("helburua");
                 String jatorria = emaitza.getString("jatorria");
 
-                Paketea paketea = new Paketea(id, entregaEginBeharData, hartzailea, dimentsioak, entregatuta, helburua, jatorria);
+                Paketea paketea = new Paketea(id, entregaEginBeharData, hartzailea, dimentsioak, entregatzen, helburua, jatorria);
                 zerrenda.add(paketea);
+
+                System.out.println(zerrenda.size());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
