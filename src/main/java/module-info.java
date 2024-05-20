@@ -4,6 +4,7 @@ module paketak.admin.kudetzaileakapp {
 
     requires org.controlsfx.controls;
     requires java.sql;
+    requires java.desktop;
 
     exports paketak.admin;
     opens paketak.admin to javafx.fxml;

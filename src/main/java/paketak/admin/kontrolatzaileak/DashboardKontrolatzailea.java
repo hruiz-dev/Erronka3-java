@@ -1,88 +1,59 @@
 package paketak.admin.kontrolatzaileak;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.scene.layout.*;
 import paketak.admin.modeloak.Paketea;
 import paketak.admin.zerbitzuak.MysqlConector;
 
+import javax.swing.*;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class DashboardKontrolatzailea {
 
-    private static MysqlConector mysql = MysqlConector.getInstance();
+
     @FXML
-    public Label banatzekopaketeak;
+    private VBox datuPanela;
+
     @FXML
-    public Label laisterBanatzekoak;
+    private Button btHasiera;
+
+    @FXML
+    private Button btBanatzaileak;
+
+    @FXML
+    private Button btPaketeak;
 
     public void initialize(){
-        aktualizatuPaketeDatuak();
+
     }
 
-    public void showPanel(){
-        System.out.println("Show panel sakatuta");
-    }
-
-    public static ArrayList<Paketea> getPaketeak(){
-        ArrayList<Paketea> zerrenda = new ArrayList<Paketea>();
-
-        // Sql kontsulta egin
-        ResultSet emaitza = mysql.createQuery("SELECT * FROM `Paketea` \n" +
-                "WHERE `entrega_egin_beharreko_data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 10 DAY) \n" +
-                "ORDER BY `entrega_egin_beharreko_data` ASC;");
-
+    public void loadPanel(String fxmlFile) {
         try {
-
-            // Kkontsultatik datuak objetuera ppasa eta hauek zeernda batean gorde
-            while (emaitza.next()) {
-
-                int id = emaitza.getInt("id");
-                Date entregaEginBeharData = emaitza.getDate("entrega_egin_beharreko_data");
-                String hartzailea = emaitza.getString("hartzailea");
-                String dimentsioak = emaitza.getString("dimensioak");
-                boolean entregatuta = emaitza.getBoolean("entregatuta");
-                String helburua = emaitza.getString("helburua");
-                String jatorria = emaitza.getString("jatorria");
-
-                Paketea paketea = new Paketea(id, entregaEginBeharData, hartzailea, dimentsioak, entregatuta, helburua, jatorria);
-                zerrenda.add(paketea);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Node node = loader.load();
+            datuPanela.getChildren().setAll(node);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        return zerrenda;
     }
 
-    /**
-     * Funtzio honek datu basean dauden pakete kopurua eta laister banatu behar diren pakete kopurua aktulizatzen du interfazean
-     */
-    public void aktualizatuPaketeDatuak(){
+    public void showPanelHasiera(){
+        loadPanel("/paketak/admin/panelHasiera.fxml");
+    }
 
-        // Sql kontsultak egin
-        ResultSet paketeak = mysql.createQuery("SELECT COUNT(*) FROM `Paketea` WHERE `Banatzailea_id` IS NULL");
+    public void showPanelBanatzaileak(){
+        loadPanel("/paketak/admin/panelBanatzaileak.fxml");
+    }
 
-        ResultSet banatzekoak = mysql.createQuery("SELECT COUNT(*) FROM `Paketea` \n" +
-                "WHERE `entrega_egin_beharreko_data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 10 DAY) \n" +
-                "ORDER BY `entrega_egin_beharreko_data` ASC;");
-
-        try {
-            // Kontsultaren emaitzak lortu eta interfazearen labelak aktulizatu
-            if (paketeak.next()) {
-                int count = paketeak.getInt(1);
-                banatzekopaketeak.setText(Integer.toString(count));
-            }
-
-            if (banatzekoak.next()) {
-                int count = banatzekoak.getInt(1);
-                laisterBanatzekoak.setText(Integer.toString(count));
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+    public void aldatuBtAukeratua(){
 
     }
+
+
 }

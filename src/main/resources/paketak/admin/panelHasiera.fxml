@@ -1,36 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" styleClass="datuPanela" stylesheets="@../../dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelHasieraKontrolatzailea">
+<VBox prefHeight="745.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelHasieraKontrolatzailea">
    <children>
-       <TableView fx:id="paketeTabla" layoutX="7.0" layoutY="133.0" prefHeight="663.0" prefWidth="1394.0">
-            <columns>
-                <TableColumn fx:id="idColumn" prefWidth="195.0" text="ID" />
-                <TableColumn fx:id="entregaEginBeharDataColumn" prefWidth="200.0" text="Entrega Egin Behar Data" />
-                <TableColumn fx:id="hartzaileaColumn" minWidth="2.0" prefWidth="200.0" text="Hartzailea" />
-                <TableColumn fx:id="dimentsioakColumn" minWidth="9.0" prefWidth="200.0" text="Dimentsioak" />
-                <TableColumn fx:id="entregatutaColumn" minWidth="0.0" prefWidth="200.0" text="Entregatuta" />
-                <TableColumn fx:id="helburuaColumn" minWidth="9.0" prefWidth="200.0" text="Helburua" />
-                <TableColumn fx:id="jatorriaColumn" prefWidth="200.0" text="Jatorria" />
-            </columns>
-        </TableView>
-      <ToolBar layoutX="8.0" layoutY="93.0" prefHeight="40.0" prefWidth="1387.0">
-        <items>
-            <Label text="Entregatze data:" />
-            <DatePicker />
-        </items>
-      </ToolBar>
-      <Label layoutX="8.0" layoutY="6.0" stylesheets="@../../dashboard.css" text="LAISTER ENTREGATU BEHARREKO PAKETEAK">
+      <GridPane alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="23.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="banatzekopaketeak" text="3" textFill="#404040">
+               <font>
+                  <Font size="58.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="92.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@irudiak/paketeaIkonoa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="inzidentziakKont" text="1" textFill="#404040" GridPane.columnIndex="1">
+               <font>
+                  <Font size="58.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="92.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@irudiak/alertIkon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label fx:id="laisterBanatzekoak" text="2" textFill="#404040" GridPane.columnIndex="2">
+               <font>
+                  <Font size="58.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="92.0" fitWidth="102.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@irudiak/pendienteIkonoa.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+         <padding>
+            <Insets bottom="70.0" left="70.0" right="70.0" top="70.0" />
+         </padding>
+      </GridPane>
+      <Label stylesheets="@../../dashboard.css" text="LAISTER ENTREGATU BEHARREKO PAKETEAK">
          <font>
-            <Font name="System Bold" size="54.0" />
+            <Font name="System Bold" size="45.0" />
          </font>
       </Label>
+      <ToolBar prefHeight="40.0" prefWidth="1387.0">
+         <items>
+            <Label text="Entregatze data:" />
+            <DatePicker />
+         </items>
+      </ToolBar>
+      <TableView fx:id="paketeTabla" prefHeight="644.0" prefWidth="1154.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="195.0" text="ID" />
+            <TableColumn fx:id="entregaEginBeharDataColumn" prefWidth="200.0" text="Entrega Egin Behar Data" />
+            <TableColumn fx:id="hartzaileaColumn" minWidth="2.0" prefWidth="200.0" text="Hartzailea" />
+            <TableColumn fx:id="dimentsioakColumn" minWidth="9.0" prefWidth="200.0" text="Dimentsioak" />
+            <TableColumn fx:id="entregatzenColumn" minWidth="0.0" prefWidth="200.0" text="Entregatzen" />
+            <TableColumn fx:id="helburuaColumn" minWidth="9.0" prefWidth="200.0" text="Helburua" />
+            <TableColumn fx:id="jatorriaColumn" prefWidth="200.0" text="Jatorria" />
+         </columns>
+      </TableView>
    </children>
-</AnchorPane>
+</VBox>
