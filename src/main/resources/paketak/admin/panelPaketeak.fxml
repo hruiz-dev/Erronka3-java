@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import java.lang.Boolean?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="933.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelPaketeKontrolatzailea">
+   <children>
+      <Label text="Banatzaileak">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <SplitPane dividerPositions="0.75" prefHeight="762.0" prefWidth="1334.0">
+         <items>
+            <VBox prefHeight="602.0" prefWidth="742.0">
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="600.0">
+                     <contextMenu>
+                        <ContextMenu>
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                           </items>
+                        </ContextMenu>
+                     </contextMenu>
+                     <items>
+                        <TextField fx:id="bilatzaileaTextField" />
+                        <Button mnemonicParsing="false" onAction="#bilatuBanatzaileak" prefHeight="26.0" prefWidth="42.0">
+                           <graphic>
+                              <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@irudiak/bilatu.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <ComboBox fx:id="filterCombox" prefWidth="150.0" promptText="ID">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="ID" />
+                                 <String fx:value="Entrega egin beharreko data" />
+                                 <String fx:value="Hartzailea" />
+                                 <String fx:value="Helburua" />
+                                 <String fx:value="Jatorria" />
+                                 <String fx:value="Banatzailea_id" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <Button mnemonicParsing="false" onAction="#updateBanatzailea">
+                           <graphic>
+                              <ImageView fitHeight="23.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@irudiak/reload.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </items>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToolBar>
+                  <TableView fx:id="banatzaileakTaula" onMouseClicked="#tablanAukeratu" prefHeight="700.0" prefWidth="736.0">
+                    <columns>
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="izena" prefWidth="169.0" text="Entrega egin beharreko data" />
+                        <TableColumn fx:id="abizena" prefWidth="136.0" text="Hartzailea" />
+                        <TableColumn fx:id="erabiltzailea" prefWidth="75.0" text="Dimensioak" />
+                        <TableColumn fx:id="pasahitza" prefWidth="75.0" text="Hauskorra" />
+                        <TableColumn fx:id="entregak" prefWidth="75.0" text="Helburua" />
+                        <TableColumn fx:id="beranduEntregak" prefWidth="134.0" text="Jatorria" />
+                        <TableColumn prefWidth="75.0" text="Entregatzen" />
+                        <TableColumn prefWidth="101.0" text="Banatzailea_id" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox prefHeight="741.0" prefWidth="228.0">
+               <children>
+                  <AnchorPane prefHeight="0.0" prefWidth="0.0">
+                     <children>
+                        <Label layoutX="23.0" layoutY="88.0" prefHeight="17.0" prefWidth="78.0" text="Id" />
+                        <Label layoutX="23.0" layoutY="128.0" prefHeight="17.0" prefWidth="164.0" text="Entrega egin beharreko data" />
+                        <Label layoutX="23.0" layoutY="168.0" prefHeight="17.0" prefWidth="78.0" text="Hartzailea" />
+                        <Label layoutX="23.0" layoutY="207.0" prefHeight="17.0" prefWidth="78.0" text="Dimensioak" />
+                        <Label layoutX="23.0" layoutY="245.0" prefHeight="17.0" prefWidth="78.0" text="Hauskorra" />
+                        <Label layoutX="23.0" layoutY="285.0" prefHeight="17.0" prefWidth="78.0" text="Helburua" />
+                        <Label layoutX="23.0" layoutY="323.0" prefHeight="17.0" prefWidth="78.0" text="Jatorria" />
+                        <Button layoutX="23.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#ezabatuBanatzailea" prefHeight="25.0" prefWidth="75.0" text="Ezabatu" />
+                        <Button layoutX="130.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#gordeBanatzailea" prefHeight="25.0" prefWidth="75.0" text="Gorde aldaketak" />
+                        <Button layoutX="348.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#sortubanatzailea" prefHeight="25.0" prefWidth="75.0" text="Berria" />
+                        <TextField fx:id="idTextArea" layoutX="212.0" layoutY="84.0" />
+                        <TextField fx:id="izenaTextArea" layoutX="212.0" layoutY="124.0" />
+                        <TextField fx:id="abizenaTextArea" layoutX="212.0" layoutY="164.0" />
+                        <TextField fx:id="erabiltzaileaTextArea" layoutX="212.0" layoutY="203.0" />
+                        <TextField fx:id="helburuaTextArea" layoutX="212.0" layoutY="281.0" />
+                        <TextField fx:id="jatorriaTextArea" layoutX="212.0" layoutY="319.0" />
+                        <Button layoutX="242.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#garbituTextAreak" prefHeight="25.0" prefWidth="75.0" text="Garbitu" />
+                        <Label layoutX="23.0" layoutY="361.0" prefHeight="17.0" prefWidth="78.0" text="Entregatzen" />
+                        <TextField fx:id="entregatzenTextArea" layoutX="212.0" layoutY="357.0" />
+                        <Label layoutX="23.0" layoutY="398.0" prefHeight="17.0" prefWidth="78.0" text="Banatzailea_id" />
+                        <TextField fx:id="banatzaileaIdTextArea" layoutX="212.0" layoutY="394.0" />
+                        <ComboBox layoutX="212.0" layoutY="241.0" prefWidth="150.0" promptText="FALSE">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="FALSE" />
+                                 <String fx:value="TRUE" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+         </items>
+      </SplitPane>
+      <Pane fx:id="alertPanel" prefHeight="79.0" prefWidth="1495.0" style="-fx-border-radius: 20px; -fx-background-color: #00ff00;" visible="false">
+         <children>
+            <Button layoutY="-1.0" mnemonicParsing="false" onAction="#itxiAlertPanel" prefHeight="79.0" prefWidth="78.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../Users/1ag3.hegoruiz/Downloads/x.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="alertLabel" layoutX="77.0" layoutY="22.0" text="Label">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>

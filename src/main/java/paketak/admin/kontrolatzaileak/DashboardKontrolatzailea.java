@@ -33,6 +33,10 @@ public class DashboardKontrolatzailea {
 
     }
 
+    /**
+     * Metodo honek gure panel prizipalean ze panel kargatzen den kontrolatzen du
+     * @param fxmlFile kargatu nahi den panelaren fitxategiaren izena
+     */
     public void loadPanel(String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -43,16 +47,35 @@ public class DashboardKontrolatzailea {
         }
     }
 
+    /**
+     * Metodo honek Hasiera panela jartzen du panel aktibo gixa
+     */
     public void showPanelHasiera(){
         loadPanel("/paketak/admin/panelHasiera.fxml");
+        setActiveNull();
+        btHasiera.getStyleClass().add("active");
     }
 
     public void showPanelBanatzaileak(){
         loadPanel("/paketak/admin/panelBanatzaileak.fxml");
+        setActiveNull();
+        btBanatzaileak.getStyleClass().add("active");
     }
 
-    public void aldatuBtAukeratua(){
+    public void showPanelPaketeak(){
+        loadPanel("/paketak/admin/paketeak.fxml");
+        setActiveNull();
+        btPaketeak.getStyleClass().add("active");
 
+    }
+
+    /**
+     * Metodo honek botoi guztiei active klasea kentzen die
+     */
+    public void setActiveNull(){
+        btHasiera.getStyleClass().remove("active");
+        btBanatzaileak.getStyleClass().remove("active");
+        btPaketeak.getStyleClass().remove("active");
     }
 
 
