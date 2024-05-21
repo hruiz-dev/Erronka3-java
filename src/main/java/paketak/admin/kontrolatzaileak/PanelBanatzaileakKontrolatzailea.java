@@ -58,6 +58,9 @@ public class PanelBanatzaileakKontrolatzailea {
     @FXML
     private Label alertLabel;
 
+    @FXML
+    private TextField bilatzaileaTextField;
+
 
     public void initialize() {
         // Tablako zutabe bakoitza Paketea objetuko atributu bati esleitu.
@@ -124,9 +127,9 @@ public class PanelBanatzaileakKontrolatzailea {
     public void tablaSortu () {
         Banatzailea.setBanatzaileak(getBanatzaileak());
         List<Banatzailea> banatzaileak = Banatzailea.getBanatzaileak();
+
         ObservableList<Banatzailea> data = FXCollections.observableArrayList(banatzaileak);
         banatzaileakTaula.setItems(data);
-        System.out.println("Bai");
     }
 
     /**
@@ -146,16 +149,18 @@ public class PanelBanatzaileakKontrolatzailea {
 
     // TODO: Datubasean trigger bat sortu Banatzailea ezabatzean honek esleituta dituen pakete guztien banatzailea id null jartzea, pakete historian ere bai
     public void ezabatuBanatzailea() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Ezabatu Banatzailea");
-        alert.setHeaderText("Ziur zaude banatzailea ezabatu nahi duzula?");
-        alert.setContentText("Ezabatzean, banatzailearen datu guztiak ezabatuko dira.");
+        Alert alert = sortuAlerta("Ezabatu Banatzailea",
+                "Ziur zaude banatzailea ezabatu nahi duzula?",
+                "Ezabatzean, banatzailearen datu guztiak ezabatuko dira.");
+
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             Banatzailea banatzailea = banatzaileakTaula.getSelectionModel().getSelectedItem();
-            mysql.createQuery("DELETE FROM `Banatzailea` WHERE `id` = " + banatzailea.getId());
+            mysql.createUpdate("DELETE FROM `Banatzailea` WHERE `id` = " + banatzailea.getId());
+
             tablaSortu();
             garbituTextAreak();
+
             erakutsiAlertPanelSucessfull(Integer.toString(banatzailea.getId()) + " zenbakidun banatzailea ezabatu da.");
             return;
         }
@@ -189,8 +194,11 @@ public class PanelBanatzaileakKontrolatzailea {
         );
 
         mysql.createUpdate(sql, datuak);
+
         Banatzailea.setBanatzaileak(getBanatzaileak());
+
         tablaSortu();
+
         erakutsiAlertPanelSucessfull( idTextArea.getText() + " zenbakidun banatzailea datuak eguneratu dira.");
     }
 
@@ -211,6 +219,18 @@ public class PanelBanatzaileakKontrolatzailea {
      * Metodo honek datu basean banatzaile berri bat sortzene du, eta honen id zein den esaten dio kudeatzaileari
      */
     public void sortubanatzailea() {
+        if (!komprobatuTextAreak()) {
+            return;
+        }
+        Alert alert = sortuAlerta("Sortu Banatzailea", "Ziur zaude banatzailea sortu nahi duzula?",
+                "Sortzean, banatzailearen datu guztiak datu basean sartuko dira.");
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.CANCEL) {
+            erakutsiAlertPanelErrorea("Banatzailea sortzea bertan behera geratu da.");
+            return;
+        }
+
         //Mysql kontsulta sortu
         String sql = "INSERT INTO `Banatzailea` " +
                 "(`id`, `izena`, `abizena`, `pasahitza`, `erabiltzailea`, `entregak`, `berandu_entregatuta`) " +
@@ -238,6 +258,7 @@ public class PanelBanatzaileakKontrolatzailea {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         // Kudeatzaileari Id erakutsi
         erakutsiAlertPanelSucessfull(id + " zenbakidun banatzailea sortu da.");
     }
@@ -276,6 +297,26 @@ public class PanelBanatzaileakKontrolatzailea {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Funtzio honek arlet motako panel bat sortzen du
+     * @param title alertaren titulua
+     * @param head  alertaren goiburua
+     * @param content alertaren edukia
+     * @return sortutako alerta
+     */
+    public Alert sortuAlerta(String title,String head, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(head);
+        alert.setContentText(content);
+        return alert;
+
+    }
+
+    public void bilatuBanatzaileak() {
+
     }
 
 
