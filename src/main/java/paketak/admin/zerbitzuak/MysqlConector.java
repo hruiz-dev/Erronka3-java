@@ -32,24 +32,41 @@ public class MysqlConector {
     }
 
     /**
-     * Funtzio honek MysqlConector klasearen instantzia itzultzen du
      * @return MysqlConector
      */
     public static MysqlConector getInstance() {
         if (mysql == null) {
             mysql = new MysqlConector();
+            mysql.sortuTabla();
         }
         return mysql;
     }
 
     /**
-     * Funtzio honek datu basean select motako queryak egiten ditu
+     * Metodo honek datu basea astean erbiltzailea taula sortzen du ez bada
+     * existitzen
+     */
+    private void sortuTabla() {
+        String query = "CREATE TABLE IF NOT EXISTS erabiltzailea " +
+                " (id INT AUTO_INCREMENT PRIMARY KEY, " +
+                " izena VARCHAR(100)," +
+                " abizena VARCHAR(100)," +
+                "na_zenbakia VARCHAR(100), " +
+                "erabiltzaile_izena VARCHAR(100)," +
+                "pasahitza VARCHAR(100)," +
+                "mota VARCHAR(100))";
+        mysql.createUpdate(query);
+    }
+
+    /**
+     * 8
+     * Metodo honek datu basean select motako queryak egiten ditu
      *
      * @param select select query-a
-     * @param datuak komekin separatutako kontsultan behar diren datuak
+     * @param datuak queryan sartu nahi diren datuak
      * @return selecta ejekutatzean lortutako datuak
      */
-    public ResultSet createQuery(String select, String datuak) {
+    public ResultSet createQuery(String select, Map<Integer, String> datuak) {
         ResultSet rs = null;
         try {
             PreparedStatement stmt = sortuEstamentua(select, datuak);
@@ -84,9 +101,9 @@ public class MysqlConector {
      * egiten du
      *
      * @param update Select motakoa ez den edozein query
-     * @param datuak komekin separatutako kontsultan behar diren datuak
+     * @param datuak insert egiteko sartu nahi diren datuak
      */
-    public void createUpdate(String update, String datuak) {
+    public void createUpdate(String update, Map<Integer, String> datuak) {
         try {
             PreparedStatement stmt = sortuEstamentua(update, datuak);
             stmt.executeUpdate();
@@ -125,27 +142,17 @@ public class MysqlConector {
      * Metodo honek estamentuak sortzen ditu
      *
      * @param query  estamentuaren biurtu nahi den querya
-     * @param datuak komekin separatutako kontsultan behar diren datuak
+     * @param datuak estamenduan sartu nahi deiren datuak
      * @return sortutako estamentua
      */
-    public PreparedStatement sortuEstamentua(String query, String datuak) throws SQLException {
+    public PreparedStatement sortuEstamentua(String query, Map<Integer, String> datuak) throws SQLException {
 
         PreparedStatement ps = connection.prepareStatement(query);
-        int i = 0;
 
-        do {
-            String datu;
-            if (datuak.contains(",")) {
-                datu = datuak.substring(0, datuak.indexOf(","));
-                datuak = datuak.substring(datuak.indexOf(",") + 1);
-            } else {
-                datu = datuak;
-                datuak = "";
-            }
-            ps.setString(++i, datu);
-        } while (!datuak.isEmpty());
+        for (Map.Entry<Integer, String> entry : datuak.entrySet()) {
+            ps.setString(entry.getKey(), entry.getValue());
 
+        }
         return ps;
     }
-
 }
