@@ -9,7 +9,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import paketak.admin.modeloak.Paketea;
 import paketak.admin.zerbitzuak.MysqlConector;
-import paketak.admin.zerbitzuak.TablaModelCreator;
 
 import java.sql.Date;
 import java.sql.ResultSet;

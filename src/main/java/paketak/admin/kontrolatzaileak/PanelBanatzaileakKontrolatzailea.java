@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import paketak.admin.modeloak.Banatzailea;
+import paketak.admin.zerbitzuak.BanatzaileZerbitzua;
 import paketak.admin.zerbitzuak.MysqlConector;
 
 import javax.swing.*;
@@ -60,6 +61,8 @@ public class PanelBanatzaileakKontrolatzailea {
 
     @FXML
     private TextField bilatzaileaTextField;
+    @FXML
+    private ComboBox<String> filterCombox;
 
 
     public void initialize() {
@@ -91,41 +94,11 @@ public class PanelBanatzaileakKontrolatzailea {
         tablaSortu();
     }
 
-    public ArrayList<Banatzailea> getBanatzaileak(){
-
-        ArrayList<Banatzailea> zerrenda = new ArrayList<Banatzailea>();
-        // Sql kontsulta egin
-        ResultSet emaitza = mysql.createQuery("SELECT * FROM `Banatzailea`");
-
-        try {
-
-            // Kkontsultatik datuak objetuera ppasa eta hauek zeernda batean gorde
-            while (emaitza.next()) {
-
-                int id = emaitza.getInt("id");
-                String izena = emaitza.getString("izena");
-                String abizena = emaitza.getString("abizena");
-                String erabiltzailea = emaitza.getString("erabiltzailea");
-                String pasahitza = emaitza.getString("pasahitza");
-                int entregak = emaitza.getInt("entregak");
-                int beranduEntregak = emaitza.getInt("berandu_entregatuta");
-
-                Banatzailea banatzailea = new Banatzailea(id, izena, abizena, erabiltzailea, pasahitza, entregak, beranduEntregak);
-                zerrenda.add(banatzailea);
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return zerrenda;
-    }
-
     /**
      *Metodo honek datubasetik ateratako Banatzaileak Tablan bistarentzen ditu
      */
     public void tablaSortu () {
-        Banatzailea.setBanatzaileak(getBanatzaileak());
+        BanatzaileZerbitzua.updateBanatzaileakDatubasetik();
         List<Banatzailea> banatzaileak = Banatzailea.getBanatzaileak();
 
         ObservableList<Banatzailea> data = FXCollections.observableArrayList(banatzaileak);
@@ -137,6 +110,7 @@ public class PanelBanatzaileakKontrolatzailea {
      */
     public void tablanAukeratu() {
         Banatzailea banatzailea = banatzaileakTaula.getSelectionModel().getSelectedItem();
+
         idTextArea.setText(String.valueOf(banatzailea.getId()));
         izenaTextArea.setText(banatzailea.getIzena());
         abizenaTextArea.setText(banatzailea.getAbizena());
@@ -194,8 +168,6 @@ public class PanelBanatzaileakKontrolatzailea {
         );
 
         mysql.createUpdate(sql, datuak);
-
-        Banatzailea.setBanatzaileak(getBanatzaileak());
 
         tablaSortu();
 
@@ -315,8 +287,55 @@ public class PanelBanatzaileakKontrolatzailea {
 
     }
 
+    /**
+     * Metodo honek tablan ikusten diren banatzaileak aldatzen ditu comboxa eta bilatzaileko textuaren arabera
+     */
     public void bilatuBanatzaileak() {
+        String bilatzailea = bilatzaileaTextField.getText();
+        String filter = filterCombox.getValue();
+        List<Banatzailea> banatzaileak = Banatzailea.getBanatzaileak();
+        List<Banatzailea> emaitza = new ArrayList<>();
 
+        switch (filter) {
+            case "ID":
+                for (Banatzailea banatzailea : banatzaileak) {
+                    if (Integer.toString(banatzailea.getId()).contains(bilatzailea)) {
+                        emaitza.add(banatzailea);
+                    }
+                }
+                break;
+            case "Izena":
+                for (Banatzailea banatzailea : banatzaileak) {
+                    if (banatzailea.getIzena().contains(bilatzailea)) {
+                        emaitza.add(banatzailea);
+                    }
+                }
+                break;
+            case "Abizena":
+                for (Banatzailea banatzailea : banatzaileak) {
+                    if (banatzailea.getAbizena().contains(bilatzailea)) {
+                        emaitza.add(banatzailea);
+                    }
+                }
+                break;
+            case "Erabiltzailea":
+                for (Banatzailea banatzailea : banatzaileak) {
+                    if (banatzailea.getErabiltzailea().contains(bilatzailea)) {
+                        emaitza.add(banatzailea);
+                    }
+                }
+                break;
+        }
+        ObservableList<Banatzailea> data = FXCollections.observableArrayList(emaitza);
+        banatzaileakTaula.setItems(data);
+    }
+
+    /**
+     * Metodo honek banatzailen datuak refreskatzen ditu datu basetik
+     */
+    public void updateBanatzailea() {
+        BanatzaileZerbitzua.updateBanatzaileakDatubasetik();
+        tablaSortu();
     }
 
 
