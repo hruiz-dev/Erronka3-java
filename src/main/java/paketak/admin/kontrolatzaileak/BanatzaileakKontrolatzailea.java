@@ -223,7 +223,7 @@ public class BanatzaileakKontrolatzailea {
      */
     public void erakutsiAlertPanelErrorea(String mezua) {
         alertLabel.setText(mezua);
-        alertPanel.setStyle("-fx-background-color: #ff0000");
+        alertPanel.setStyle("-fx-background-color: #d64b4b");
         alertPanel.setVisible(true);
     }
 
@@ -233,7 +233,7 @@ public class BanatzaileakKontrolatzailea {
      */
     public void erakutsiAlertPanelSucessfull(String mezua) {
         alertLabel.setText(mezua);
-        alertPanel.setStyle("-fx-background-color: #00ff00");
+        alertPanel.setStyle("-fx-background-color: #b5dba7");
         alertPanel.setVisible(true);
     }
 
