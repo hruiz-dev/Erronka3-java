@@ -211,6 +211,8 @@ public class PaketeKontrolatzailea {
     }
 
     public void updatePaketea() {
+        PaketeZerbitzua.updatepaketeakDB();
+        tablaSortu();
     }
 
     public void tablanAukeratu() {
