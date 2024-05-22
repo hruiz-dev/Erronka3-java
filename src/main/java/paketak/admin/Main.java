@@ -11,10 +11,11 @@ import java.io.IOException;
 
 public class Main extends Application {
     private static Stage stage;
+    private static String firstFxml = "login.fxml";
     @Override
     public void start(Stage newstage) throws IOException {
         stage = newstage;
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(firstFxml));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("pakAG Kudeatzailea - Administrazioa");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("irudiak/icon.png")));
@@ -38,6 +39,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        if (args[0].equals("-dev")) {
+            firstFxml = "dashboard.fxml";
+        }
         launch();
     }
 }

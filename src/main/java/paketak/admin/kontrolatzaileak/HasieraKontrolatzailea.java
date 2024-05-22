@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PanelHasieraKontrolatzailea {
+public class HasieraKontrolatzailea {
 
     private static MysqlConector mysql = MysqlConector.getInstance();
 

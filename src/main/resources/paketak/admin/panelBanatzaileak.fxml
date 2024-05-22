@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="933.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelBanatzaileakKontrolatzailea">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="933.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.BanatzaileakKontrolatzailea">
    <children>
       <Label text="Banatzaileak">
          <font>
@@ -78,7 +78,7 @@
                   </ToolBar>
                   <TableView fx:id="banatzaileakTaula" onMouseClicked="#tablanAukeratu" prefHeight="700.0" prefWidth="736.0">
                     <columns>
-                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
                       <TableColumn fx:id="izena" prefWidth="169.0" text="Izena" />
                         <TableColumn fx:id="abizena" prefWidth="136.0" text="Abizena" />
                         <TableColumn fx:id="erabiltzailea" prefWidth="75.0" text="Erabiltzailea" />
@@ -101,7 +101,7 @@
                         <Label layoutX="21.0" layoutY="302.0" prefHeight="17.0" prefWidth="78.0" text="Entregak" />
                         <Label layoutX="23.0" layoutY="342.0" prefHeight="17.0" prefWidth="78.0" text="Berandu Entregak" />
                         <Button layoutX="23.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#ezabatuBanatzailea" prefHeight="25.0" prefWidth="75.0" text="Ezabatu" />
-                        <Button layoutX="130.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#gordeBanatzailea" prefHeight="25.0" prefWidth="75.0" text="Gorde aldaketak" />
+                        <Button layoutX="116.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#gordeBanatzailea" prefHeight="25.0" prefWidth="104.0" text="Gorde aldaketak" />
                         <Button layoutX="348.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#sortubanatzailea" prefHeight="25.0" prefWidth="75.0" text="Berria" />
                         <TextField fx:id="idTextArea" layoutX="167.0" layoutY="92.0" />
                         <TextField fx:id="izenaTextArea" layoutX="167.0" layoutY="132.0" />

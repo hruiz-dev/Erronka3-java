@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="745.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelHasieraKontrolatzailea">
+<VBox prefHeight="745.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.HasieraKontrolatzailea">
    <children>
       <GridPane alignment="CENTER">
          <columnConstraints>

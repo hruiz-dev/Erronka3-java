@@ -5,20 +5,23 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import paketak.admin.modeloak.Banatzailea;
 import paketak.admin.zerbitzuak.BanatzaileZerbitzua;
+import paketak.admin.zerbitzuak.Filter;
+import paketak.admin.zerbitzuak.Komponenteak;
 import paketak.admin.zerbitzuak.MysqlConector;
 
-import javax.swing.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class PanelBanatzaileakKontrolatzailea {
+public class BanatzaileakKontrolatzailea {
     private static MysqlConector mysql = MysqlConector.getInstance();
 
     @FXML
@@ -98,7 +101,7 @@ public class PanelBanatzaileakKontrolatzailea {
      *Metodo honek datubasetik ateratako Banatzaileak Tablan bistarentzen ditu
      */
     public void tablaSortu () {
-        BanatzaileZerbitzua.updateBanatzaileakDatubasetik();
+        BanatzaileZerbitzua.updateBanatzaileakDB();
         List<Banatzailea> banatzaileak = Banatzailea.getBanatzaileak();
 
         ObservableList<Banatzailea> data = FXCollections.observableArrayList(banatzaileak);
@@ -123,7 +126,7 @@ public class PanelBanatzaileakKontrolatzailea {
 
     // TODO: Datubasean trigger bat sortu Banatzailea ezabatzean honek esleituta dituen pakete guztien banatzailea id null jartzea, pakete historian ere bai
     public void ezabatuBanatzailea() {
-        Alert alert = sortuAlerta("Ezabatu Banatzailea",
+        Alert alert = Komponenteak.sortuAlerta("Ezabatu Banatzailea",
                 "Ziur zaude banatzailea ezabatu nahi duzula?",
                 "Ezabatzean, banatzailearen datu guztiak ezabatuko dira.");
 
@@ -148,30 +151,22 @@ public class PanelBanatzaileakKontrolatzailea {
         if (!komprobatuTextAreak()) {
             return;
         }
-        String sql = "UPDATE `Banatzailea` SET `id` = ?," +
-                " `izena` = ?," +
-                " `abizena` = ?," +
-                " `pasahitza` = ?," +
-                " `erabiltzailea` = ?," +
-                " `entregak` = ?," +
-                " `berandu_entregatuta` = ?" +
-                " WHERE `Banatzailea`.`id` = " + idTextArea.getText();
-
-        Map<Integer, String> datuak = Map.of(
-                1, idTextArea.getText(),
-                2, izenaTextArea.getText(),
-                3, abizenaTextArea.getText(),
-                4, pasahitzaTextArea.getText(),
-                5, erabiltzaileaTextArea.getText(),
-                6, entregakTextArea.getText(),
-                7, beranduEntregakTextArea.getText()
+        Banatzailea banatzailea = new Banatzailea(
+                Integer.parseInt(idTextArea.getText()),
+                izenaTextArea.getText(),
+                abizenaTextArea.getText(),
+                erabiltzaileaTextArea.getText(),
+                pasahitzaTextArea.getText(),
+                Integer.parseInt(entregakTextArea.getText()),
+                Integer.parseInt(beranduEntregakTextArea.getText())
         );
 
-        mysql.createUpdate(sql, datuak);
+        Boolean a = BanatzaileZerbitzua.updateBanatzaileaDB(banatzailea);
 
-        tablaSortu();
+        if (a) {
+            erakutsiAlertPanelSucessfull( idTextArea.getText() + " zenbakidun banatzailea datuak eguneratu dira.");
+        }
 
-        erakutsiAlertPanelSucessfull( idTextArea.getText() + " zenbakidun banatzailea datuak eguneratu dira.");
     }
 
     /**
@@ -194,7 +189,7 @@ public class PanelBanatzaileakKontrolatzailea {
         if (!komprobatuTextAreak()) {
             return;
         }
-        Alert alert = sortuAlerta("Sortu Banatzailea", "Ziur zaude banatzailea sortu nahi duzula?",
+        Alert alert = Komponenteak.sortuAlerta("Sortu Banatzailea", "Zihur zaude banatzailea sortu nahi duzula?",
                 "Sortzean, banatzailearen datu guztiak datu basean sartuko dira.");
         alert.showAndWait();
 
@@ -202,34 +197,17 @@ public class PanelBanatzaileakKontrolatzailea {
             erakutsiAlertPanelErrorea("Banatzailea sortzea bertan behera geratu da.");
             return;
         }
-
-        //Mysql kontsulta sortu
-        String sql = "INSERT INTO `Banatzailea` " +
-                "(`id`, `izena`, `abizena`, `pasahitza`, `erabiltzailea`, `entregak`, `berandu_entregatuta`) " +
-                "VALUES (NULL, ?, ?, ?, ?, ?, ?)";
-
-        Map<Integer, String> datuak = Map.of(
-                1, izenaTextArea.getText(),
-                2, abizenaTextArea.getText(),
-                3, pasahitzaTextArea.getText(),
-                4, erabiltzaileaTextArea.getText(),
-                5, entregakTextArea.getText(),
-                6, beranduEntregakTextArea.getText()
+        Banatzailea banatzailea = new Banatzailea(
+                Integer.parseInt(idTextArea.getText()),
+                izenaTextArea.getText(),
+                abizenaTextArea.getText(),
+                erabiltzaileaTextArea.getText(),
+                pasahitzaTextArea.getText(),
+                Integer.parseInt(entregakTextArea.getText()),
+                Integer.parseInt(beranduEntregakTextArea.getText())
         );
-
-        mysql.createUpdate(sql, datuak);
-
-        // Mysql hemandoko id lortu
-        ResultSet lastId = mysql.createQuery("SELECT LAST_INSERT_ID()");
-        String id = "";
-
-        try {
-            if (lastId.next()) { // Move cursor to the first row
-                id = lastId.getString(1);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        // Banatzailea datu basean gorde
+        String id = BanatzaileZerbitzua.insertBanatzaileaDB(banatzailea);
 
         // Kudeatzaileari Id erakutsi
         erakutsiAlertPanelSucessfull(id + " zenbakidun banatzailea sortu da.");
@@ -272,69 +250,28 @@ public class PanelBanatzaileakKontrolatzailea {
     }
 
     /**
-     * Funtzio honek arlet motako panel bat sortzen du
-     * @param title alertaren titulua
-     * @param head  alertaren goiburua
-     * @param content alertaren edukia
-     * @return sortutako alerta
-     */
-    public Alert sortuAlerta(String title,String head, String content) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(head);
-        alert.setContentText(content);
-        return alert;
-
-    }
-
-    /**
      * Metodo honek tablan ikusten diren banatzaileak aldatzen ditu comboxa eta bilatzaileko textuaren arabera
      */
-    public void bilatuBanatzaileak() {
-        String bilatzailea = bilatzaileaTextField.getText();
-        String filter = filterCombox.getValue();
-        List<Banatzailea> banatzaileak = Banatzailea.getBanatzaileak();
-        List<Banatzailea> emaitza = new ArrayList<>();
+public void bilatuBanatzaileak() {
+    String bilatzailea = bilatzaileaTextField.getText();
+    String filter = filterCombox.getValue();
+    ArrayList<Banatzailea> emaitza;
 
-        switch (filter) {
-            case "ID":
-                for (Banatzailea banatzailea : banatzaileak) {
-                    if (Integer.toString(banatzailea.getId()).contains(bilatzailea)) {
-                        emaitza.add(banatzailea);
-                    }
-                }
-                break;
-            case "Izena":
-                for (Banatzailea banatzailea : banatzaileak) {
-                    if (banatzailea.getIzena().contains(bilatzailea)) {
-                        emaitza.add(banatzailea);
-                    }
-                }
-                break;
-            case "Abizena":
-                for (Banatzailea banatzailea : banatzaileak) {
-                    if (banatzailea.getAbizena().contains(bilatzailea)) {
-                        emaitza.add(banatzailea);
-                    }
-                }
-                break;
-            case "Erabiltzailea":
-                for (Banatzailea banatzailea : banatzaileak) {
-                    if (banatzailea.getErabiltzailea().contains(bilatzailea)) {
-                        emaitza.add(banatzailea);
-                    }
-                }
-                break;
-        }
-        ObservableList<Banatzailea> data = FXCollections.observableArrayList(emaitza);
-        banatzaileakTaula.setItems(data);
+    if (filter.equals("")){
+        filter = "Id";
     }
+
+    emaitza = Filter.filtratu(Banatzailea.getBanatzaileak(), filter, bilatzailea);
+
+    ObservableList<Banatzailea> data = FXCollections.observableArrayList(emaitza);
+    banatzaileakTaula.setItems(data);
+}
 
     /**
      * Metodo honek banatzailen datuak refreskatzen ditu datu basetik
      */
     public void updateBanatzailea() {
-        BanatzaileZerbitzua.updateBanatzaileakDatubasetik();
+        BanatzaileZerbitzua.updateBanatzaileakDB();
         tablaSortu();
     }
 

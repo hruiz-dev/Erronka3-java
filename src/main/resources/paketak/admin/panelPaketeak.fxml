@@ -21,10 +21,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import java.lang.Boolean?>
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="933.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelPaketeKontrolatzailea">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="933.0" prefWidth="1495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PaketeKontrolatzailea">
    <children>
-      <Label text="Banatzaileak">
+      <Label text="Paketeak">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
@@ -43,7 +42,7 @@
                      </contextMenu>
                      <items>
                         <TextField fx:id="bilatzaileaTextField" />
-                        <Button mnemonicParsing="false" onAction="#bilatuBanatzaileak" prefHeight="26.0" prefWidth="42.0">
+                        <Button mnemonicParsing="false" onAction="#bilatuPaketea" prefHeight="26.0" prefWidth="42.0">
                            <graphic>
                               <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -64,7 +63,7 @@
                               </FXCollections>
                            </items>
                         </ComboBox>
-                        <Button mnemonicParsing="false" onAction="#updateBanatzailea">
+                        <Button mnemonicParsing="false" onAction="#updatePaketea">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -81,14 +80,14 @@
                   <TableView fx:id="banatzaileakTaula" onMouseClicked="#tablanAukeratu" prefHeight="700.0" prefWidth="736.0">
                     <columns>
                       <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
-                      <TableColumn fx:id="izena" prefWidth="169.0" text="Entrega egin beharreko data" />
-                        <TableColumn fx:id="abizena" prefWidth="136.0" text="Hartzailea" />
-                        <TableColumn fx:id="erabiltzailea" prefWidth="75.0" text="Dimensioak" />
-                        <TableColumn fx:id="pasahitza" prefWidth="75.0" text="Hauskorra" />
-                        <TableColumn fx:id="entregak" prefWidth="75.0" text="Helburua" />
-                        <TableColumn fx:id="beranduEntregak" prefWidth="134.0" text="Jatorria" />
-                        <TableColumn prefWidth="75.0" text="Entregatzen" />
-                        <TableColumn prefWidth="101.0" text="Banatzailea_id" />
+                      <TableColumn fx:id="entregaData" prefWidth="169.0" text="Entrega egin beharreko data" />
+                        <TableColumn fx:id="hartzailea" prefWidth="136.0" text="Hartzailea" />
+                        <TableColumn fx:id="dimesioak" prefWidth="75.0" text="Dimensioak" />
+                        <TableColumn fx:id="hauskorra" prefWidth="75.0" text="Hauskorra" />
+                        <TableColumn fx:id="helburua" prefWidth="75.0" text="Helburua" />
+                        <TableColumn fx:id="jatorria" prefWidth="134.0" text="Jatorria" />
+                        <TableColumn fx:id="entregatzen" prefWidth="75.0" text="Entregatzen" />
+                        <TableColumn fx:id="banatzaileaId" prefWidth="101.0" text="Banatzailea_id" />
                     </columns>
                   </TableView>
                </children>
@@ -104,21 +103,28 @@
                         <Label layoutX="23.0" layoutY="245.0" prefHeight="17.0" prefWidth="78.0" text="Hauskorra" />
                         <Label layoutX="23.0" layoutY="285.0" prefHeight="17.0" prefWidth="78.0" text="Helburua" />
                         <Label layoutX="23.0" layoutY="323.0" prefHeight="17.0" prefWidth="78.0" text="Jatorria" />
-                        <Button layoutX="23.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#ezabatuBanatzailea" prefHeight="25.0" prefWidth="75.0" text="Ezabatu" />
-                        <Button layoutX="130.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#gordeBanatzailea" prefHeight="25.0" prefWidth="75.0" text="Gorde aldaketak" />
-                        <Button layoutX="348.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#sortubanatzailea" prefHeight="25.0" prefWidth="75.0" text="Berria" />
+                        <Button layoutX="23.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#ezabatuPaketea" prefHeight="25.0" prefWidth="75.0" text="Ezabatu" />
+                        <Button layoutX="114.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#gordePaketea" prefHeight="25.0" prefWidth="105.0" text="Gorde aldaketak" />
+                        <Button layoutX="348.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#sortuPaketea" prefHeight="25.0" prefWidth="75.0" text="Berria" />
                         <TextField fx:id="idTextArea" layoutX="212.0" layoutY="84.0" />
-                        <TextField fx:id="izenaTextArea" layoutX="212.0" layoutY="124.0" />
-                        <TextField fx:id="abizenaTextArea" layoutX="212.0" layoutY="164.0" />
-                        <TextField fx:id="erabiltzaileaTextArea" layoutX="212.0" layoutY="203.0" />
-                        <TextField fx:id="helburuaTextArea" layoutX="212.0" layoutY="281.0" />
+                        <TextField fx:id="entregaDataTextField" layoutX="212.0" layoutY="124.0" />
+                        <TextField fx:id="hartzaileaTextField" layoutX="212.0" layoutY="164.0" />
+                        <TextField fx:id="dimentsioakTextField" layoutX="212.0" layoutY="203.0" />
+                        <TextField fx:id="helburuaTextField" layoutX="212.0" layoutY="281.0" />
                         <TextField fx:id="jatorriaTextArea" layoutX="212.0" layoutY="319.0" />
                         <Button layoutX="242.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#garbituTextAreak" prefHeight="25.0" prefWidth="75.0" text="Garbitu" />
                         <Label layoutX="23.0" layoutY="361.0" prefHeight="17.0" prefWidth="78.0" text="Entregatzen" />
-                        <TextField fx:id="entregatzenTextArea" layoutX="212.0" layoutY="357.0" />
                         <Label layoutX="23.0" layoutY="398.0" prefHeight="17.0" prefWidth="78.0" text="Banatzailea_id" />
-                        <TextField fx:id="banatzaileaIdTextArea" layoutX="212.0" layoutY="394.0" />
-                        <ComboBox layoutX="212.0" layoutY="241.0" prefWidth="150.0" promptText="FALSE">
+                        <TextField fx:id="banatzaileaIdTextField" layoutX="212.0" layoutY="394.0" />
+                        <ComboBox fx:id="hauskorraComboBox" layoutX="212.0" layoutY="241.0" prefWidth="150.0" promptText="FALSE">
+                           <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                 <String fx:value="FALSE" />
+                                 <String fx:value="TRUE" />
+                              </FXCollections>
+                           </items>
+                        </ComboBox>
+                        <ComboBox fx:id="entregatzenComboBox" layoutX="212.0" layoutY="357.0" prefWidth="150.0" promptText="FALSE">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
                                  <String fx:value="FALSE" />

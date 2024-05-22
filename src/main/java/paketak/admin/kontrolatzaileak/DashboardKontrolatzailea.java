@@ -63,7 +63,7 @@ public class DashboardKontrolatzailea {
     }
 
     public void showPanelPaketeak(){
-        loadPanel("/paketak/admin/paketeak.fxml");
+        loadPanel("/paketak/admin/panelPaketeak.fxml");
         setActiveNull();
         btPaketeak.getStyleClass().add("active");
 
