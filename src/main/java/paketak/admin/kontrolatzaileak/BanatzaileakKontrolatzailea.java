@@ -257,7 +257,7 @@ public void bilatuBanatzaileak() {
     String filter = filterCombox.getValue();
     ArrayList<Banatzailea> emaitza;
 
-    if (filter.equals("")){
+    if (filter == null){
         filter = "Id";
     }
 

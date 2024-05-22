@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.PanelBanatzaileakKontrolatzailea">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.BanatzaileakKontrolatzailea">
    <children>
       <Label text="Banatzaileak">
          <font>
@@ -39,10 +39,10 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <ComboBox fx:id="filterCombox" prefWidth="150.0" promptText="ID">
+                        <ComboBox fx:id="filterCombox" prefWidth="150.0" promptText="Id">
                            <items>
                               <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="ID" />
+                                 <String fx:value="Id" />
                                  <String fx:value="Izena" />
                                  <String fx:value="Abizena" />
                                  <String fx:value="Erabiltzailea" />
@@ -65,7 +65,7 @@
                   </ToolBar>
                   <TableView fx:id="banatzaileakTaula" onMouseClicked="#tablanAukeratu" prefHeight="700.0" prefWidth="736.0">
                     <columns>
-                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id " />
                       <TableColumn fx:id="izena" prefWidth="169.0" text="Izena" />
                         <TableColumn fx:id="abizena" prefWidth="136.0" text="Abizena" />
                         <TableColumn fx:id="erabiltzailea" prefWidth="75.0" text="Erabiltzailea" />

@@ -1,7 +1,9 @@
 package paketak.admin.modeloak;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 /**
  * {@code Paketea} klaseak pakete baten informazioa gordetzeko erabiltzen da.
@@ -14,6 +16,9 @@ public class Paketea {
     private boolean entregatzen;
     private String helburua;
     private String jatorria;
+    private boolean hauskorra;
+    private int banatzaileaId;
+
 
     private static ArrayList<Paketea> paketeak = new ArrayList<Paketea>();
 
@@ -27,15 +32,19 @@ public class Paketea {
      * @param entregatzen           egiaztatzen du ea paketea entregatzen dagoen edo ez
      * @param helburua              paketearen helburua
      * @param jatorria              paketearen jatorriaren izena
+     * @param hauskorra              paketearen egoera
+     * @param banatzaileaId         paketearen banatzailearen identifikadorea
      */
-    public Paketea(int id, Date entregaEginBeharData, String hartzailea, String dimentsioak, boolean entregatzen, String helburua, String jatorria) {
+    public Paketea(int id, Date entregaEginBeharData, String hartzailea, String dimentsioak, Boolean hauskorra, String helburua, String jatorria, boolean entregatzen, int banatzaileaId) {
         this.id = id;
         this.entregaEginBeharData = entregaEginBeharData;
         this.hartzailea = hartzailea;
         this.dimentsioak = dimentsioak;
-        this.entregatzen = entregatzen;
+        this.hauskorra = hauskorra;
         this.helburua = helburua;
         this.jatorria = jatorria;
+        this.entregatzen = entregatzen;
+        this.banatzaileaId = banatzaileaId;
     }
 
     /**
@@ -72,6 +81,11 @@ public class Paketea {
      */
     public void setEntregaEginBeharData(Date entregaEginBeharData) {
         this.entregaEginBeharData = entregaEginBeharData;
+    }
+
+    public String getFormatedData() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(entregaEginBeharData);
     }
 
     /**
@@ -162,6 +176,26 @@ public class Paketea {
      */
     public void setJatorria(String jatorria) {
         this.jatorria = jatorria;
+    }
+
+    public boolean isEntregatzen() {
+        return entregatzen;
+    }
+
+    public boolean getHauskorra() {
+        return hauskorra;
+    }
+
+    public void setHauskorra(boolean hauskorra) {
+        this.hauskorra = hauskorra;
+    }
+
+    public int getBanatzaileaId() {
+        return banatzaileaId;
+    }
+
+    public void setBanatzaileaId(int banatzaileaId) {
+        this.banatzaileaId = banatzaileaId;
     }
 
     /**

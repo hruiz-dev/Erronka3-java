@@ -5,7 +5,10 @@ import paketak.admin.modeloak.Banatzailea;
 import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 public class Filter {
 
@@ -20,21 +23,30 @@ public class Filter {
      * @return bilatzailea aldagaiaren balioa duen objetuak
      */
     public static <T> ArrayList<T> filtratu(ArrayList<T> objetuak, String filter, String bilatzailea){
-        Class<?> clasea = objetuak.get(0).getClass();
-        ArrayList<T> emaitza = new ArrayList<>();
+    Class<?> clasea = objetuak.getFirst().getClass();
+    ArrayList<T> emaitza = new ArrayList<>();
 
-        Method method = null;
+    Method method = null;
 
-        try {
-            method = clasea.getMethod("get" + filter);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+    try {
+        method = clasea.getMethod("get" + filter);
+    } catch (NoSuchMethodException e) {
+        throw new RuntimeException(e);
+    }
 
         try {
             for (T objetua : objetuak) {
-                String fieldValue = (String) method.invoke(objetua);
-                if (fieldValue.contains(bilatzailea)) {
+                Object fieldValueObj = method.invoke(objetua);
+                String fieldValue = null;
+                if (fieldValueObj instanceof Integer) {
+                    fieldValue = ((Integer) fieldValueObj).toString();
+                } else if (fieldValueObj instanceof String) {
+                    fieldValue = (String) fieldValueObj;
+                } else if (fieldValueObj instanceof Date) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    fieldValue = formatter.format((Date) fieldValueObj);
+                }
+                if (fieldValue != null && fieldValue.contains(bilatzailea)) {
                     emaitza.add(objetua);
                 }
 
@@ -42,6 +54,7 @@ public class Filter {
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
-        return emaitza;
+
+    return emaitza;
     }
 }

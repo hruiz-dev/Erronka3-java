@@ -9,11 +9,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import paketak.admin.modeloak.Paketea;
 import paketak.admin.zerbitzuak.MysqlConector;
+import paketak.admin.zerbitzuak.PaketeZerbitzua;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HasieraKontrolatzailea {
@@ -65,43 +68,9 @@ public class HasieraKontrolatzailea {
      * Datubaseti ateratako Paketak Tablabistaratu
      */
     public void tablaSortu () {
-        Paketea.setPaketeak(getPaketeak());
-        List<Paketea> paketeak = Paketea.getPaketeak();
+        List<Paketea> paketeak = PaketeZerbitzua.hurrengoEgunakPaketeak();
         ObservableList<Paketea> data = FXCollections.observableArrayList(paketeak);
         paketeTabla.setItems(data);
-    }
-
-    public static ArrayList<Paketea> getPaketeak(){
-        ArrayList<Paketea> zerrenda = new ArrayList<Paketea>();
-
-        // Sql kontsulta egin
-        ResultSet emaitza = mysql.createQuery("SELECT * FROM `Paketea` \n" +
-                "WHERE `entrega_egin_beharreko_data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 10 DAY) \n" +
-                "ORDER BY `entrega_egin_beharreko_data` ASC;");
-
-        try {
-
-            // Kkontsultatik datuak objetuera ppasa eta hauek zeernda batean gorde
-            while (emaitza.next()) {
-
-                int id = emaitza.getInt("id");
-                Date entregaEginBeharData = emaitza.getDate("entrega_egin_beharreko_data");
-                String hartzailea = emaitza.getString("hartzailea");
-                String dimentsioak = emaitza.getString("dimensioak");
-                boolean entregatzen = emaitza.getBoolean("entregatzen");
-                String helburua = emaitza.getString("helburua");
-                String jatorria = emaitza.getString("jatorria");
-
-                Paketea paketea = new Paketea(id, entregaEginBeharData, hartzailea, dimentsioak, entregatzen, helburua, jatorria);
-                zerrenda.add(paketea);
-
-                System.out.println(zerrenda.size());
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return zerrenda;
     }
 
     /**
