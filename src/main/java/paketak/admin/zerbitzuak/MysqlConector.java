@@ -133,7 +133,11 @@ public class MysqlConector {
         PreparedStatement ps = connection.prepareStatement(query);
 
         for (Map.Entry<Integer, String> entry : datuak.entrySet()) {
-            ps.setString(entry.getKey(), entry.getValue());
+            if (entry.getValue() == null) {
+                ps.setNull(entry.getKey(), java.sql.Types.INTEGER);
+            } else {
+                ps.setString(entry.getKey(), entry.getValue());
+            }
 
         }
         return ps;

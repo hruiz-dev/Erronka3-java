@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 public class PaketeZerbitzua {
@@ -43,9 +44,7 @@ public class PaketeZerbitzua {
                     Paketea paketea = new Paketea(id, data, hartzailea, dimentsioak, Boolean.valueOf(hauskorra), helburua, jatorria, entregatzen, banatzaileaId);
                     zerrenda.add(paketea);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
+        } catch (SQLException | ParseException e) {
             throw new RuntimeException(e);
         }
         Paketea.setPaketeak(zerrenda);
@@ -128,29 +127,33 @@ public class PaketeZerbitzua {
      */
     public static Map<Integer, String> sortuPaketeaMap(Paketea paketea,Boolean id) {
 
-    if (id) {
-        return Map.of(
-                1, String.valueOf(paketea.getId()),
-                2, paketea.getFormatedData(),
-                3, paketea.getHartzailea(),
-                4, paketea.getDimentsioak(),
-                5, paketea.getHauskorra() ? "1" : "0",
-                6, paketea.getHelburua(),
-                7, paketea.getJatorria(),
-                8, paketea.getEntregatzen() ? "1" : "0",
-                9, String.valueOf(paketea.getBanatzaileaId())
-        );
-    }
-        return Map.of(
-                1, paketea.getFormatedData(),
-                2, paketea.getHartzailea(),
-                3, paketea.getDimentsioak(),
-                4, paketea.getHauskorra() ? "1" : "0",
-                5, paketea.getHelburua(),
-                6, paketea.getJatorria(),
-                7, paketea.getEntregatzen() ? "1" : "0",
-                8, String.valueOf(paketea.getBanatzaileaId())
-        );
+        String a = paketea.getBanatzaileaId() == 0 ? null : String.valueOf(paketea.getBanatzaileaId());
+
+        Map<Integer, String> map = new HashMap<>();
+
+        if (id) {
+            map.put(1, String.valueOf(paketea.getId()));
+            map.put(2, paketea.getFormatedData());
+            map.put(3, paketea.getHartzailea());
+            map.put(4, paketea.getDimentsioak());
+            map.put(5, paketea.getHauskorra() ? "1" : "0");
+            map.put(6, paketea.getHelburua());
+            map.put(7, paketea.getJatorria());
+            map.put(8, paketea.getEntregatzen() ? "1" : "0");
+            map.put(9, a);
+            return map;
+        }
+
+        map.put(1, paketea.getFormatedData());
+        map.put(2, paketea.getHartzailea());
+        map.put(3, paketea.getDimentsioak());
+        map.put(4, paketea.getHauskorra() ? "1" : "0");
+        map.put(5, paketea.getHelburua());
+        map.put(6, paketea.getJatorria());
+        map.put(7, paketea.getEntregatzen() ? "1" : "0");
+        map.put(8, a);
+
+        return map;
 
     }
 
