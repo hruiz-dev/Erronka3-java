@@ -15,6 +15,10 @@ public class loginKontrolatzailea {
     @FXML
     private PasswordField pasahitzaText;
 
+    /**
+     * Metodo honek textfield-etan sartutako erabiltzailea eta pasahitza konprobatzen du.
+     * eta hauek zuzenak badira panel prinzipala kargatu
+     */
     public void hasiSaioa() {
         if (erabiltzaileaText.getText().equals("admin") && pasahitzaText.getText().equals("admin")) {
             System.out.println("Saioa hasi da");

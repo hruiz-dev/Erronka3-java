@@ -84,6 +84,7 @@ public class PaketeKontrolatzailea {
         entregatzen.setCellValueFactory(new PropertyValueFactory<>("entregatzen"));
         banatzaileaId.setCellValueFactory(new PropertyValueFactory<>("banatzaileaId"));
 
+        // Data zutabea formatu egokian erakusteko
         entregaData.setCellValueFactory(cellData -> {
             Paketea paketea = cellData.getValue();
             if (paketea != null) {
@@ -96,6 +97,9 @@ public class PaketeKontrolatzailea {
         tablaSortu();
     }
 
+    /**
+     * Metodo honek tablan gure Paketen datuk Eguneratu eta Bistaratzen ditu
+     */
     public void tablaSortu() {
         PaketeZerbitzua.updatepaketeakDB();
         ObservableList<Paketea> data = FXCollections.observableArrayList(Paketea.getPaketeak());
@@ -103,6 +107,10 @@ public class PaketeKontrolatzailea {
 
     }
 
+    /**
+     * Metodo honek lehenik alerta bat erekuratzen du, hau baizkoa ematen badiogu
+     * Paketea datub asetik ezabatzen du.
+     */
     public void ezabatuPaketea() {
         Alert alert = Komponenteak.sortuAlerta("Ezabatu paketea",
                 "Ziur zaude paketea ezabatu nahi duzula?",
@@ -123,6 +131,9 @@ public class PaketeKontrolatzailea {
 
     }
 
+    /**
+     * Metodo honek Datu Basean Update egiten du, eta pasatako paketearen datuak eguneratzen ditu.
+     */
     public void gordePaketea() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
@@ -137,7 +148,7 @@ public class PaketeKontrolatzailea {
                 date,
                 hartzaileaTextField.getText(),
                 dimentsioakTextField.getText(),
-                Boolean.parseBoolean(hauskorraComboBox.getValue()),
+               Boolean.parseBoolean(hauskorraComboBox.getValue()),
                 helburuaTextField.getText(),
                 jatorriaTextArea.getText(),
                 Boolean.parseBoolean(entregatzenComboBox.getValue()),
@@ -153,6 +164,9 @@ public class PaketeKontrolatzailea {
 
     }
 
+    /**
+     * Metodo honek Text Area guztiak garbitzen ditu.
+     */
     public void garbituTextAreak() {
         idTextArea.setText("");
         entregaDataTextField.setText("");
@@ -166,7 +180,21 @@ public class PaketeKontrolatzailea {
 
     }
 
+    /**
+     * Emtodo honek pakete berri bat sortzen du datu basean
+     */
     public void sortuPaketea() {
+
+        if (!komprobatuTextAreak()) {
+            return;
+        }
+        Alert alert = Komponenteak.sortuAlerta("Sortu paketea",
+                "Ziur zaude paketea sortu nahi duzula?",
+                "Sortzean, paketearen datu guztiak datu basean sartuko dira.");
+        if (alert.getResult() != ButtonType.OK) {
+            erakutsiAlertPanelErrorea("paketea sortzea bertan behera geratu da.");
+            return;
+        }
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
@@ -193,6 +221,9 @@ public class PaketeKontrolatzailea {
         erakutsiAlertPanelSucessfull(id + " zenbakidun paketea sortu da.");
     }
 
+    /**
+     * Metodo honek paketeak filtratzen ditu bilatzailearen arabera
+     */
     public void bilatuPaketea() {
         String bilatzailea = bilatzaileaTextField.getText();
         String filter = filterCombox.getValue();
@@ -210,9 +241,16 @@ public class PaketeKontrolatzailea {
         paketeakTabla.setItems(data);
     }
 
+    /**
+     * Metodo honek tabla refreskatzen du
+     */
     public void updatePaketea() {
+        tablaSortu();
     }
 
+    /**
+     * Metodo honek tablan aukeratutako kolugna erabiliz horren datuak textArea guztietan sartzen ditu
+     */
     public void tablanAukeratu() {
         Paketea paketea = (Paketea) paketeakTabla.getSelectionModel().getSelectedItem();
         idTextArea.setText(Integer.toString(paketea.getId()));
@@ -228,6 +266,9 @@ public class PaketeKontrolatzailea {
 
     }
 
+    /**
+     * Metodo honek alerta panela ixten du
+     */
     public void itxiAlertPanel() {
         alertPanel.setVisible(false);
     }
@@ -250,6 +291,18 @@ public class PaketeKontrolatzailea {
         alertLabel.setText(mezua);
         alertPanel.setStyle("-fx-background-color: #b5dba7");
         alertPanel.setVisible(true);
+    }
+
+    /**
+     * Metodo honek textArea guztiak bete diren konprobatzen du
+     * @return True bete badira, false bestela
+     */
+    public Boolean komprobatuTextAreak() {
+        if (idTextArea.getText().isEmpty() || entregaDataTextField.getText().isEmpty() || hartzaileaTextField.getText().isEmpty() || dimentsioakTextField.getText().isEmpty() || helburuaTextField.getText().isEmpty() || jatorriaTextArea.getText().isEmpty() || banatzaileaIdTextField.getText().isEmpty()) {
+            erakutsiAlertPanelErrorea("Eremu guztiak bete behar dira.");
+            return false;
+        }
+        return true;
     }
 
 

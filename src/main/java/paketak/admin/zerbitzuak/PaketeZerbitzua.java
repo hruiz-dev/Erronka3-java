@@ -14,6 +14,9 @@ public class PaketeZerbitzua {
 
     private static MysqlConector mysql = MysqlConector.getInstance();
 
+    /**
+     * Metodo honek datu baseko pakete guztiak aktualizatzen ditu
+     */
     public static void updatepaketeakDB(){
 
         ArrayList<Paketea> zerrenda = new ArrayList<>();
@@ -48,6 +51,10 @@ public class PaketeZerbitzua {
         Paketea.setPaketeak(zerrenda);
     }
 
+    /**
+     * Metodo hnek hurrengo 10 egunetan entrgatu beharreko paketeak erakusten ditu.
+     * @return hurrengo 10 egunetan entregatu beharreko paketeak
+     */
     public static ArrayList<Paketea> hurrengoEgunakPaketeak(){
         ArrayList<Paketea> zerrenda = new ArrayList<Paketea>();
 
@@ -84,6 +91,11 @@ public class PaketeZerbitzua {
         return zerrenda;
     }
 
+    /**
+     * Metodo honek datu basera pakete berri bat insertatzen du
+     * @param paketea sartu nahi den paketea
+     * @return sartutako paketearen id-a
+     */
     public static String insertpaketeaDB(Paketea paketea) {
         //Mysql kontsulta sortu
         String sql = "INSERT INTO `Paketea` " +
@@ -108,6 +120,12 @@ public class PaketeZerbitzua {
         return id;
     }
 
+    /**
+     * Funtzi honek paketearen datuekin sortutako map bat itzultzen du
+     * @param paketea map bihurtu nahi den paketea
+     * @param id id-a sartu nahi den ala ez
+     * @return paketearen datuekin sortutako map-a
+     */
     public static Map<Integer, String> sortuPaketeaMap(Paketea paketea,Boolean id) {
 
     if (id) {
@@ -136,6 +154,10 @@ public class PaketeZerbitzua {
 
     }
 
+    /**
+     * Metodo honek datu Paketearen datuak aktualizatzen ditu
+     * @param paketea aktualizatu nahi den paketea
+     */
     public static void updatepaketeaDB(Paketea paketea) {
         //sql kontsulta sortu
         String sql = "UPDATE `Paketea` SET `id` = ?," +
@@ -152,4 +174,6 @@ public class PaketeZerbitzua {
         // Kontsulta exekutatu
         mysql.createUpdate(sql, sortuPaketeaMap(paketea, true));
     }
+
+
 }

@@ -37,29 +37,12 @@ public class MysqlConector {
     public static MysqlConector getInstance() {
         if (mysql == null) {
             mysql = new MysqlConector();
-            mysql.sortuTabla();
         }
         return mysql;
     }
 
     /**
-     * Metodo honek datu basea astean erbiltzailea taula sortzen du ez bada
-     * existitzen
-     */
-    private void sortuTabla() {
-        String query = "CREATE TABLE IF NOT EXISTS erabiltzailea " +
-                " (id INT AUTO_INCREMENT PRIMARY KEY, " +
-                " izena VARCHAR(100)," +
-                " abizena VARCHAR(100)," +
-                "na_zenbakia VARCHAR(100), " +
-                "erabiltzaile_izena VARCHAR(100)," +
-                "pasahitza VARCHAR(100)," +
-                "mota VARCHAR(100))";
-        mysql.createUpdate(query);
-    }
-
-    /**
-     * 8
+     *
      * Metodo honek datu basean select motako queryak egiten ditu
      *
      * @param select select query-a

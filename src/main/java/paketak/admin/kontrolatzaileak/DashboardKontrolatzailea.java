@@ -56,12 +56,18 @@ public class DashboardKontrolatzailea {
         btHasiera.getStyleClass().add("active");
     }
 
+    /**
+     * Metodo honek Banatzaileak panela jartzen du panel aktibo gixa
+     */
     public void showPanelBanatzaileak(){
         loadPanel("/paketak/admin/panelBanatzaileak.fxml");
         setActiveNull();
         btBanatzaileak.getStyleClass().add("active");
     }
 
+    /**
+     * Metodo honek Paketeak panela jartzen du panel aktibo gixa
+     */
     public void showPanelPaketeak(){
         loadPanel("/paketak/admin/panelPaketeak.fxml");
         setActiveNull();

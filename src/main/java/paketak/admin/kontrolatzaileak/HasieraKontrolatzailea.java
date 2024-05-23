@@ -65,7 +65,7 @@ public class HasieraKontrolatzailea {
     }
 
     /**
-     * Datubaseti ateratako Paketak Tablabistaratu
+     * Datubasetik ateratako Paketak Tablan bistaratu
      */
     public void tablaSortu () {
         List<Paketea> paketeak = PaketeZerbitzua.hurrengoEgunakPaketeak();

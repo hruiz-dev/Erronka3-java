@@ -102,6 +102,11 @@ public class BanatzaileZerbitzua {
 
     }
 
+    /**
+     * Datubasean update Kontsulta bat egiten du Banatzaile baten iformazioa aktuailizatzeko
+     * @param banatzailea aktualizatu nahi den banatzailea
+     * @return true
+     */
     public static Boolean updateBanatzaileaDB(Banatzailea banatzailea){
         //sql kontsulta sortu
         String sql = "UPDATE `Banatzailea` SET `id` = ?," +

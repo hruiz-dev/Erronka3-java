@@ -125,6 +125,11 @@ public class BanatzaileakKontrolatzailea {
     }
 
     // TODO: Datubasean trigger bat sortu Banatzailea ezabatzean honek esleituta dituen pakete guztien banatzailea id null jartzea, pakete historian ere bai
+
+    /**
+     * Metodo honek lehenik alerta bat sortzen du eta honek biezkoa jasotzen badu
+     * datu basetik banatzailea ezabatzen du
+     */
     public void ezabatuBanatzailea() {
         Alert alert = Komponenteak.sortuAlerta("Ezabatu Banatzailea",
                 "Ziur zaude banatzailea ezabatu nahi duzula?",
@@ -183,7 +188,8 @@ public class BanatzaileakKontrolatzailea {
     }
 
     /**
-     * Metodo honek datu basean banatzaile berri bat sortzene du, eta honen id zein den esaten dio kudeatzaileari
+     * Metodo honek lehenik alerta bat erakusten du eta honek baiezko jasotzen badu,
+     * datu basean banatzaile berri bat sortzene du, eta honen id zein den esaten dio kudeatzaileari
      */
     public void sortubanatzailea() {
         if (!komprobatuTextAreak()) {
