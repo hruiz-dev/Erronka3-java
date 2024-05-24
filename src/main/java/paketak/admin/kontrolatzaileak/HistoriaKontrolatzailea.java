@@ -10,71 +10,43 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import paketak.admin.modeloak.Banatzailea;
 import paketak.admin.modeloak.Paketea;
+import paketak.admin.modeloak.PaketeaHistoriala;
 import paketak.admin.zerbitzuak.BanatzaileZerbitzua;
+import paketak.admin.zerbitzuak.Filter;
+import paketak.admin.zerbitzuak.PaketeHistorialaZerbitzua;
+import paketak.admin.zerbitzuak.TableViewCreator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HistoriaKontrolatzailea {
 
     @FXML
-    public TableView<Paketea> paketeakTabla;
+    public TableView<PaketeaHistoriala> paketeakTabla;
     @FXML
     public TextField bilatzaileaPaketea;
     @FXML
-    public ComboBox filterComboxPaketea;
+    public ComboBox<String> filterComboxPaketea;
+
     @FXML
-    public TableColumn idPaketea;
+    public TableColumn<PaketeaHistoriala, String> entregaDataPaketea;
     @FXML
-    public TableColumn<Paketea, String> entregaDataPaketea;
+    public TableColumn<PaketeaHistoriala, String> entregatzeData;
+
+
     @FXML
-    public TableColumn hartzaileaPaketea;
-    @FXML
-    public TableColumn dimesioakPaketea;
-    @FXML
-    public TableColumn hauskorraPaketea;
-    @FXML
-    public TableColumn jatorriaPaketea;
-    @FXML
-    public TableColumn helburuaPaketea;
-    @FXML
-    public TableColumn entregatzenPaketea;
-    @FXML
-    public TableColumn banatzaileaIdPaketea;
-    @FXML
-    public TableView<Banatzailea> bantzaileakTabla;
-    @FXML
-    public TableColumn idBanatzailea;
-    @FXML
-    public TableColumn izenaBanatzailea;
-    @FXML
-    public TableColumn abizenaBanatzailea;
-    @FXML
-    public TableColumn erabiltzaileaBanatzailea;
-    @FXML
-    public TableColumn beranduEntregakBanatzailea;
-    @FXML
-    public TableColumn entregakBanatzailea;
+    public TableView<Banatzailea> banatzaileakTabla;
+
+
     @FXML
     public TableColumn<Banatzailea, String> pasahitzaBanatzailea;
 
     public void initialize() {
         // paketeakTabla dagokien propietateak esleitu
-        idPaketea.setCellValueFactory(new PropertyValueFactory<>("id"));
-        hartzaileaPaketea.setCellValueFactory(new PropertyValueFactory<>("hartzailea"));
-        dimesioakPaketea.setCellValueFactory(new PropertyValueFactory<>("dimesioak"));
-        hauskorraPaketea.setCellValueFactory(new PropertyValueFactory<>("hauskorra"));
-        jatorriaPaketea.setCellValueFactory(new PropertyValueFactory<>("jatorria"));
-        helburuaPaketea.setCellValueFactory(new PropertyValueFactory<>("helburua"));
-        entregatzenPaketea.setCellValueFactory(new PropertyValueFactory<>("entregatzen"));
-        banatzaileaIdPaketea.setCellValueFactory(new PropertyValueFactory<>("banatzaileaId"));
+        TableViewCreator.createTableView(PaketeaHistoriala.class, paketeakTabla);
 
         // banatzaileakTabla dagokien propietateak esleitu
-        idBanatzailea.setCellValueFactory(new PropertyValueFactory<>("id"));
-        izenaBanatzailea.setCellValueFactory(new PropertyValueFactory<>("izena"));
-        abizenaBanatzailea.setCellValueFactory(new PropertyValueFactory<>("abizena"));
-        erabiltzaileaBanatzailea.setCellValueFactory(new PropertyValueFactory<>("erabiltzailea"));
-        beranduEntregakBanatzailea.setCellValueFactory(new PropertyValueFactory<>("beranduEntregak"));
-        entregakBanatzailea.setCellValueFactory(new PropertyValueFactory<>("entregak"));
+        TableViewCreator.createTableView(Banatzailea.class, banatzaileakTabla);
 
         // pasahitzaBanatzailea osagaia eguneratzeko
         pasahitzaBanatzailea.setCellFactory(column -> {
@@ -94,16 +66,65 @@ public class HistoriaKontrolatzailea {
 
         // paketeakTabla-ko entregaDataPaketea osagaia eguneratzeko
         entregaDataPaketea.setCellValueFactory(cellData -> {
-            Paketea paketea = cellData.getValue();
+            PaketeaHistoriala paketea = cellData.getValue();
             if (paketea != null) {
                 return new SimpleStringProperty(paketea.getFormatedData());
             } else {
                 return new SimpleStringProperty(null);
             }
         });
+
+        entregatzeData.setCellValueFactory(cellData -> {
+            PaketeaHistoriala paketea = cellData.getValue();
+            if (paketea != null) {
+                return new SimpleStringProperty(paketea.getFormatedEntregatzeData());
+            } else {
+                return new SimpleStringProperty(null);
+            }
+        });
+
+        banatzaileTablaSortu();
+        paketeakTablaSortu();
     }
 
     public void bilatuPaketea() {
+        String filter = filterComboxPaketea.getValue();
+        String bilatzailea = bilatzaileaPaketea.getText();
+
+        ArrayList<PaketeaHistoriala> paketeak = PaketeaHistoriala.getPaketeak();
+        ArrayList<PaketeaHistoriala> emaitza;
+
+        if (filter == null) {
+            filter = "Id";
+        } else if(filter.equals("Entrega egin beharreko data")) {
+            filter = "EntregaEginBeharData";
+
+        } else if(filter.equals("Entregatze data")) {
+            filter = "EntregatzeData";
+        }
+
+        emaitza = Filter.filtratu( paketeak, filter, bilatzailea);
+
+        ObservableList<PaketeaHistoriala> data = FXCollections.observableArrayList(emaitza);
+        paketeakTabla.setItems(data);
+    }
+
+    /**
+     * Metodo honek tablan ikusten diren banatzaileak aldatzen ditu comboxa eta bilatzaileko textuaren arabera
+     */
+    public void bilatuBanatzaileak() {
+        String bilatzailea = bilatzaileaBanatzailea.getText();
+        String filter = filterCombox.getValue();
+        ArrayList<Banatzailea> emaitza;
+
+        if (filter == null){
+            filter = "Id";
+        }
+
+        emaitza = Filter.filtratu(Banatzailea.getBanatzaileak(), filter, bilatzailea);
+
+        ObservableList<Banatzailea> data = FXCollections.observableArrayList(emaitza);
+        banatzaileakTaula.setItems(data);
     }
 
     public void updatePaketea() {
@@ -120,6 +141,14 @@ public class HistoriaKontrolatzailea {
         List<Banatzailea> banatzaileak = Banatzailea.getBanatzaileak();
 
         ObservableList<Banatzailea> data = FXCollections.observableArrayList(banatzaileak);
-        bantzaileakTabla.setItems(data);
+        banatzaileakTabla.setItems(data);
+    }
+
+    public void paketeakTablaSortu() {
+        PaketeHistorialaZerbitzua.uppdatePaketeHistorialaDB();
+        List<PaketeaHistoriala> paketeak = PaketeaHistoriala.getPaketeak();
+
+        ObservableList<PaketeaHistoriala> data = FXCollections.observableArrayList(paketeak);
+        paketeakTabla.setItems(data);
     }
 }

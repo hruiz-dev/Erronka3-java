@@ -29,6 +29,9 @@ public class DashboardKontrolatzailea {
     @FXML
     private Button btPaketeak;
 
+    @FXML
+    private Button btHistoriala;
+
     public void initialize(){
 
     }
@@ -75,6 +78,12 @@ public class DashboardKontrolatzailea {
 
     }
 
+    public void showPanelHistoriala(){
+        loadPanel("/paketak/admin/panelHistoriala.fxml");
+        setActiveNull();
+        btHistoriala.getStyleClass().add("active");
+    }
+
     /**
      * Metodo honek botoi guztiei active klasea kentzen die
      */
@@ -82,6 +91,7 @@ public class DashboardKontrolatzailea {
         btHasiera.getStyleClass().remove("active");
         btBanatzaileak.getStyleClass().remove("active");
         btPaketeak.getStyleClass().remove("active");
+        btHistoriala.getStyleClass().remove("active");
     }
 
 

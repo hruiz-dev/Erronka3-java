@@ -52,6 +52,7 @@
                            </font>
                         </Label>
                         <Line endX="85.0" endY="1.0" layoutX="103.0" layoutY="893.0" startX="-91.5" stroke="#bf212e" />
+                        <Button fx:id="btHistoriala" layoutX="17.0" layoutY="284.0" mnemonicParsing="false" onAction="#showPanelHistoriala" prefHeight="35.0" prefWidth="170.0" styleClass="menuButtom" stylesheets="@../../dashboard.css" text="Historiala" />
                      </children>
                   </AnchorPane>
                </left>
