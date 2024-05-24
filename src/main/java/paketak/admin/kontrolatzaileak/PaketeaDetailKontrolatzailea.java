@@ -31,17 +31,19 @@ public class PaketeaDetailKontrolatzailea {
     @FXML
     Label labelBanatzailea;
 
-    public PaketeaDetailKontrolatzailea(PaketeaHistoriala paketeaHistoriala) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("resources/paketak/admin/paketea.fxml"));
-        Parent root = fxmlLoader.load();
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOpacity(1);
-        stage.setTitle("My New Stage Title");
-        stage.setScene(new Scene(root, 450, 450));
-        stage.showAndWait();
-        labelTitulua.setText(paketeaHistoriala.getId() + " - " + paketeaHistoriala.getHelburua());
-        labelHartzailea.setText(paketeaHistoriala.getHartzailea());
+    /**
+     * Metodo hau exekutatzen denean, pantailan agertuko diren datuak kargatzen dira.
+     */
+    public void initialize() {
+        PaketeaHistoriala paketea = HistoriaKontrolatzailea.paketeAukeratua;
+        labelTitulua.setText(paketea.getId() + " Paketearen informazioa");
+        labelHartzailea.setText(paketea.getHartzailea());
+        labelJatorria.setText(paketea.getJatorria());
+        labelHelburua.setText(paketea.getHelburua());
+        labelHauskorra.setText(paketea.isHauskorra() ? "Hauskorra" : "Ez da hauskorra");
+        labelEntregatzeData.setText(paketea.getEntregatzeData().toString());
+        labelEntregatuBeharrekoData.setText(paketea.getEntregaEginBeharData().toString());
+        labelBanatzailea.setText(Integer.toString(paketea.getBanatzaileaId()));
 
     }
 

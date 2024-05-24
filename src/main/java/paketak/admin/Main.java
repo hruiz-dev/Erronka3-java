@@ -39,6 +39,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        if (args.length > 0) {
+            firstFxml = "dashboard.fxml";
+        }
         launch();
     }
 }

@@ -5,9 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import paketak.admin.modeloak.Banatzailea;
 import paketak.admin.modeloak.Paketea;
 import paketak.admin.modeloak.PaketeaHistoriala;
@@ -22,29 +24,29 @@ import java.util.List;
 
 public class HistoriaKontrolatzailea {
 
-    @FXML
-    public TableView<PaketeaHistoriala> paketeakTabla;
-    @FXML
-    public TextField bilatzaileaPaketea;
-    @FXML
-    public ComboBox<String> filterComboxPaketea;
+    public static PaketeaHistoriala paketeAukeratua; // Aukeratutako paketearen informazioa gordetzeko aldagai estatikoa
 
     @FXML
-    public TableColumn<PaketeaHistoriala, String> entregaDataPaketea;
+    public TableView<PaketeaHistoriala> paketeakTabla; // Taula non paketeen historiala erakusten den
     @FXML
-    public TableColumn<PaketeaHistoriala, String> entregatzeData;
-
-
+    public TextField bilatzaileaPaketea; // Paketeak bilatzeko testu eremua
     @FXML
-    public TableView<Banatzailea> banatzaileakTabla;
-    @FXML
-    public TextField bilatzaileaBanatzailea;
-    @FXML
-    public ComboBox<String> filterComboxBanatzailea;
-
+    public ComboBox<String> filterComboxPaketea; // Paketeak iragazteko combobox-a
 
     @FXML
-    public TableColumn<Banatzailea, String> pasahitzaBanatzailea;
+    public TableColumn<PaketeaHistoriala, String> entregaDataPaketea; // Paketearen entrega data erakusten duen zutabea
+    @FXML
+    public TableColumn<PaketeaHistoriala, String> entregatzeData; // Paketea entregatu zen data erakusten duen zutabea
+
+    @FXML
+    public TableView<Banatzailea> banatzaileakTabla; // Taula non banatzaileak erakusten diren
+    @FXML
+    public TextField bilatzaileaBanatzailea; // Banatzaileak bilatzeko testu eremua
+    @FXML
+    public ComboBox<String> filterComboxBanatzailea; // Banatzaileak iragazteko combobox-a
+
+    @FXML
+    public TableColumn<Banatzailea, String> pasahitzaBanatzailea; // Banatzailearen pasahitza erakusten duen zutabea
 
     public void initialize() {
         // paketeakTabla dagokien propietateak esleitu
@@ -92,6 +94,10 @@ public class HistoriaKontrolatzailea {
         paketeakTablaSortu();
     }
 
+    /**
+     * Metodo honek paketeak bilatzeko erabiltzen diren datuak jasotzen ditu eta kondizio oiek erabiliz paketeak bilatzen ditu
+     * eta tablan erakusten ditu
+     */
     public void bilatuPaketea() {
         String filter = filterComboxPaketea.getValue();
         String bilatzailea = bilatzaileaPaketea.getText();
@@ -132,14 +138,23 @@ public class HistoriaKontrolatzailea {
         banatzaileakTabla.setItems(data);
     }
 
+    /**
+     * Datu basetik Paketen datuak aktualizatzen ditu
+     */
     public void updatePaketea() {
         paketeakTablaSortu();
     }
 
+    /**
+     * Datu basetik Banatzaileen datuak aktualizatzen ditu
+     */
     public void updateBanatzailea() {
         banatzaileTablaSortu();
     }
 
+    /**
+     * Metodo honek banatzaileak tablan ikusten diren datuak aktualizatzen ditu
+     */
     public void tablanAukeratu() {
         Banatzailea banatzailea = banatzaileakTabla.getSelectionModel().getSelectedItem();
 
@@ -152,13 +167,25 @@ public class HistoriaKontrolatzailea {
         paketeakTabla.setItems(data);
     }
 
+    /**
+     * Metodo honek panel berri bat sortzen du Tablan aukeratutako paketearen informazioa erakusteko
+     */
     public void zehaztasunakIkusi(){
         PaketeaHistoriala paketeaHistoriala = paketeakTabla.getSelectionModel().getSelectedItem();
-        try {
-            PaketeaDetailKontrolatzailea detaileLehioa = new PaketeaDetailKontrolatzailea(paketeaHistoriala);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        paketeAukeratua = paketeaHistoriala;
+        if (paketeaHistoriala != null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/paketak/admin/paketea.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setTitle("Informazioa");
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     /**
@@ -172,6 +199,9 @@ public class HistoriaKontrolatzailea {
         banatzaileakTabla.setItems(data);
     }
 
+    /**
+     * Metodo honek Paketeak tablako datuak aktualizatzen ditu
+     */
     public void paketeakTablaSortu() {
         PaketeHistorialaZerbitzua.uppdatePaketeHistorialaDB();
         List<PaketeaHistoriala> paketeak = PaketeaHistoriala.getPaketeak();

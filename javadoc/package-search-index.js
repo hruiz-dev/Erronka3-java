@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"paketak.admin.kudetzaileakapp","l":"paketak.admin"},{"m":"paketak.admin.kudetzaileakapp","l":"paketak.admin.kontrolatzaileak"},{"m":"paketak.admin.kudetzaileakapp","l":"paketak.admin.modeloak"},{"m":"paketak.admin.kudetzaileakapp","l":"paketak.admin.zerbitzuak"}];updateSearchResults();

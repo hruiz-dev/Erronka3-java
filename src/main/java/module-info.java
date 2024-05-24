@@ -12,5 +12,7 @@ module paketak.admin.kudetzaileakapp {
     exports paketak.admin.kontrolatzaileak;
     opens paketak.admin.kontrolatzaileak to javafx.fxml;
 
+    exports paketak.admin.modeloak;
+
     opens paketak.admin.modeloak to javafx.base;
 }

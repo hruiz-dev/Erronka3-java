@@ -11,6 +11,10 @@ public class PaketeHistorialaZerbitzua {
 
     private static MysqlConector mysql = MysqlConector.getInstance();
 
+
+    /**
+     * Metodo honek datu basean dauden pakete historialak kargatzen ditu
+     */
     public static void uppdatePaketeHistorialaDB() {
 
         ArrayList<PaketeaHistoriala> zerrenda = new ArrayList<PaketeaHistoriala>();

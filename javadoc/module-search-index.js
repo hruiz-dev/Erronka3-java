@@ -1,0 +1,1 @@
+moduleSearchIndex = [{"l":"paketak.admin.kudetzaileakapp"}];updateSearchResults();

@@ -78,6 +78,9 @@ public class DashboardKontrolatzailea {
 
     }
 
+    /**
+     * Metodo honek Historiala panela jartzen du panel aktibo gixa
+     */
     public void showPanelHistoriala(){
         loadPanel("/paketak/admin/panelHistoriala.fxml");
         setActiveNull();
