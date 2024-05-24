@@ -36,6 +36,10 @@ public class HistoriaKontrolatzailea {
 
     @FXML
     public TableView<Banatzailea> banatzaileakTabla;
+    @FXML
+    public TextField bilatzaileaBanatzailea;
+    @FXML
+    public ComboBox<String> filterComboxBanatzailea;
 
 
     @FXML
@@ -114,7 +118,7 @@ public class HistoriaKontrolatzailea {
      */
     public void bilatuBanatzaileak() {
         String bilatzailea = bilatzaileaBanatzailea.getText();
-        String filter = filterCombox.getValue();
+        String filter = filterComboxBanatzailea.getValue();
         ArrayList<Banatzailea> emaitza;
 
         if (filter == null){
@@ -124,13 +128,27 @@ public class HistoriaKontrolatzailea {
         emaitza = Filter.filtratu(Banatzailea.getBanatzaileak(), filter, bilatzailea);
 
         ObservableList<Banatzailea> data = FXCollections.observableArrayList(emaitza);
-        banatzaileakTaula.setItems(data);
+        banatzaileakTabla.setItems(data);
     }
 
     public void updatePaketea() {
+        paketeakTablaSortu();
+    }
+
+    public void updateBanatzailea() {
+        banatzaileTablaSortu();
     }
 
     public void tablanAukeratu() {
+        Banatzailea banatzailea = banatzaileakTabla.getSelectionModel().getSelectedItem();
+
+        ArrayList<PaketeaHistoriala> paketeak = PaketeaHistoriala.getPaketeak();
+        ArrayList<PaketeaHistoriala> emaitza;
+
+        emaitza = Filter.filtratu( paketeak, "BanatzaileaId",  String.valueOf(banatzailea.getId()));
+
+        ObservableList<PaketeaHistoriala> data = FXCollections.observableArrayList(emaitza);
+        paketeakTabla.setItems(data);
     }
 
     /**

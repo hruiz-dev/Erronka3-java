@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox prefHeight="745.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.HasieraKontrolatzailea">
+<VBox prefHeight="745.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.HasieraKontrolatzailea">
    <children>
       <GridPane alignment="CENTER">
          <columnConstraints>
@@ -74,12 +66,7 @@
             <Font name="System Bold" size="45.0" />
          </font>
       </Label>
-      <ToolBar prefHeight="40.0" prefWidth="1387.0">
-         <items>
-            <Label text="Entregatze data:" />
-            <DatePicker />
-         </items>
-      </ToolBar>
+      <ToolBar prefHeight="40.0" prefWidth="1387.0" />
       <TableView fx:id="paketeTabla" prefHeight="644.0" prefWidth="1154.0">
          <columns>
             <TableColumn fx:id="idColumn" prefWidth="195.0" text="ID" />
