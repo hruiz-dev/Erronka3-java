@@ -7,10 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import paketak.admin.modeloak.Banatzailea;
-import paketak.admin.zerbitzuak.BanatzaileZerbitzua;
-import paketak.admin.zerbitzuak.Filter;
-import paketak.admin.zerbitzuak.Komponenteak;
-import paketak.admin.zerbitzuak.MysqlConector;
+import paketak.admin.zerbitzuak.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -28,19 +25,7 @@ public class BanatzaileakKontrolatzailea {
     private TableView<Banatzailea> banatzaileakTaula;
 
     @FXML
-    private TableColumn<Banatzailea, Integer> idColumn;
-    @FXML
-    private TableColumn<Banatzailea, String> izena;
-    @FXML
-    private TableColumn<Banatzailea, String> abizena;
-    @FXML
-    private TableColumn<Banatzailea, String> erabiltzailea;
-    @FXML
     private TableColumn<Banatzailea, String> pasahitza;
-    @FXML
-    private TableColumn<Banatzailea, Integer> entregak;
-    @FXML
-    private TableColumn<Banatzailea, Integer> beranduEntregak;
 
     @FXML
     private TextField idTextArea;
@@ -70,14 +55,7 @@ public class BanatzaileakKontrolatzailea {
 
     public void initialize() {
         // Tablako zutabe bakoitza Paketea objetuko atributu bati esleitu.
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        izena.setCellValueFactory(new PropertyValueFactory<>("izena"));
-        abizena.setCellValueFactory(new PropertyValueFactory<>("abizena"));
-        erabiltzailea.setCellValueFactory(new PropertyValueFactory<>("erabiltzailea"));
-        pasahitza.setCellValueFactory(new PropertyValueFactory<>("pasahitza"));
-        entregak.setCellValueFactory(new PropertyValueFactory<>("entregak"));
-        beranduEntregak.setCellValueFactory(new PropertyValueFactory<>("beranduEntregak"));
-
+        TableViewCreator.createTableView(Banatzailea.class, banatzaileakTaula);
         // Pasahitza tablan ez ikusteko kolugnan erakustendena modifikatu
         pasahitza.setCellFactory(column -> {
             return new TableCell<Banatzailea, String>() {

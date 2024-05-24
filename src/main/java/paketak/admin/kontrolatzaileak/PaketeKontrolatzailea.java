@@ -9,10 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import paketak.admin.modeloak.Banatzailea;
 import paketak.admin.modeloak.Paketea;
-import paketak.admin.zerbitzuak.Filter;
-import paketak.admin.zerbitzuak.Komponenteak;
-import paketak.admin.zerbitzuak.MysqlConector;
-import paketak.admin.zerbitzuak.PaketeZerbitzua;
+import paketak.admin.zerbitzuak.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,24 +21,9 @@ public class PaketeKontrolatzailea {
     @FXML
     private TableView paketeakTabla;
 
-    @FXML
-    private TableColumn<Paketea, Integer> idColumn;
+
     @FXML
     private TableColumn<Paketea, String> entregaData;
-    @FXML
-    private TableColumn<Paketea, String> hartzailea;
-    @FXML
-    private TableColumn<Paketea, String> dimesioak;
-    @FXML
-    private TableColumn<Paketea, String> hauskorra;
-    @FXML
-    private TableColumn<Paketea, String> helburua;
-    @FXML
-    private TableColumn<Paketea, String> jatorria;
-    @FXML
-    private TableColumn<Paketea, Boolean> entregatzen;
-    @FXML
-    private TableColumn<Paketea, Integer> banatzaileaId;
 
     @FXML
     private TextField idTextArea;
@@ -75,14 +57,8 @@ public class PaketeKontrolatzailea {
     private static MysqlConector mysql = MysqlConector.getInstance();
     public void initialize() {
         // Tablako zutabe bakoitza Paketea objetuko atributu bati esleitu.
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        hartzailea.setCellValueFactory(new PropertyValueFactory<>("hartzailea"));
-        dimesioak.setCellValueFactory(new PropertyValueFactory<>("dimentsioak"));
-        hauskorra.setCellValueFactory(new PropertyValueFactory<>("hauskorra"));
-        helburua.setCellValueFactory(new PropertyValueFactory<>("helburua"));
-        jatorria.setCellValueFactory(new PropertyValueFactory<>("jatorria"));
-        entregatzen.setCellValueFactory(new PropertyValueFactory<>("entregatzen"));
-        banatzaileaId.setCellValueFactory(new PropertyValueFactory<>("banatzaileaId"));
+
+        TableViewCreator.createTableView(Paketea.class, paketeakTabla);
 
         // Data zutabea formatu egokian erakusteko
         entregaData.setCellValueFactory(cellData -> {

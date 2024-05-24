@@ -1,5 +1,6 @@
 package paketak.admin.kontrolatzaileak;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import paketak.admin.modeloak.Paketea;
 import paketak.admin.zerbitzuak.MysqlConector;
 import paketak.admin.zerbitzuak.PaketeZerbitzua;
+import paketak.admin.zerbitzuak.TableViewCreator;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,30 +36,22 @@ public class HasieraKontrolatzailea {
     private TableView<Paketea> paketeTabla;
 
     @FXML
-    private TableColumn<Paketea, Integer> idColumn;
-    @FXML
     private TableColumn<Paketea, String> entregaEginBeharDataColumn;
-    @FXML
-    private TableColumn<Paketea, String> hartzaileaColumn;
-    @FXML
-    private TableColumn<Paketea, String> dimentsioakColumn;
-    @FXML
-    private TableColumn<Paketea, Boolean> entregatzenColumn;
-    @FXML
-    private TableColumn<Paketea, String> helburuaColumn;
-    @FXML
-    private TableColumn<Paketea, String> jatorriaColumn;
+
 
     public void initialize() {
         // Tablako zutabe bakoitza Paketea objetuko atributu bati esleitu.
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        entregaEginBeharDataColumn.setCellValueFactory(new PropertyValueFactory<>("entregaEginBeharData"));
-        hartzaileaColumn.setCellValueFactory(new PropertyValueFactory<>("hartzailea"));
-        dimentsioakColumn.setCellValueFactory(new PropertyValueFactory<>("dimentsioak"));
-        entregatzenColumn.setCellValueFactory(new PropertyValueFactory<>("entregatzen"));
-        helburuaColumn.setCellValueFactory(new PropertyValueFactory<>("helburua"));
-        jatorriaColumn.setCellValueFactory(new PropertyValueFactory<>("jatorria"));
+        TableViewCreator.createTableView(Paketea.class, paketeTabla);
 
+        // Data zutabea formatu egokian erakusteko
+        entregaEginBeharDataColumn.setCellValueFactory(cellData -> {
+            Paketea paketea = cellData.getValue();
+            if (paketea != null) {
+                return new SimpleStringProperty(paketea.getFormatedData());
+            } else {
+                return new SimpleStringProperty(null);
+            }
+        });
 
         tablaSortu();
 
