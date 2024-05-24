@@ -16,6 +16,7 @@ import paketak.admin.zerbitzuak.Filter;
 import paketak.admin.zerbitzuak.PaketeHistorialaZerbitzua;
 import paketak.admin.zerbitzuak.TableViewCreator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,6 +150,15 @@ public class HistoriaKontrolatzailea {
 
         ObservableList<PaketeaHistoriala> data = FXCollections.observableArrayList(emaitza);
         paketeakTabla.setItems(data);
+    }
+
+    public void zehaztasunakIkusi(){
+        PaketeaHistoriala paketeaHistoriala = paketeakTabla.getSelectionModel().getSelectedItem();
+        try {
+            PaketeaDetailKontrolatzailea detaileLehioa = new PaketeaDetailKontrolatzailea(paketeaHistoriala);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

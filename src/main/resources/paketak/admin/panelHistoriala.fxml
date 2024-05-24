@@ -22,7 +22,7 @@
                <children>
                   <AnchorPane layoutY="40.0" prefHeight="813.0" prefWidth="890.0">
                      <children>
-                        <TableView fx:id="paketeakTabla" onMouseClicked="#tablanAukeratu" prefHeight="819.0" prefWidth="890.0">
+                        <TableView fx:id="paketeakTabla" onMouseClicked="#zehaztasunakIkusi" prefHeight="819.0" prefWidth="890.0">
                           <columns>
                             <TableColumn fx:id="idPaketea" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="entregaDataPaketea" prefWidth="169.0" text="Entrega egin beharreko data" />
