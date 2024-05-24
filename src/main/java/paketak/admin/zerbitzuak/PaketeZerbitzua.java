@@ -66,14 +66,14 @@ public class PaketeZerbitzua {
             while (emaitza.next()) {
 
                 int id = emaitza.getInt("id");
-                String entregaEginBeharData = emaitza.getString("entregaEginBeharData");
+                String entregaEginBeharData = emaitza.getString("entrega_egin_beharreko_data");
                 String hartzailea = emaitza.getString("hartzailea");
-                String dimentsioak = emaitza.getString("dimentsioak");
+                String dimentsioak = emaitza.getString("dimensioak");
                 String hauskorra = emaitza.getString("hauskorra");
                 String helburua = emaitza.getString("helburua");
                 String jatorria = emaitza.getString("jatorria");
                 boolean entregatzen = emaitza.getBoolean("entregatzen");
-                int banatzaileaId = emaitza.getInt("banatzaileaId");
+                int banatzaileaId = emaitza.getInt("Banatzailea_Id");
 
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                 Date data = formatter.parse(entregaEginBeharData);
