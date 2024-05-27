@@ -38,7 +38,6 @@ public class HasieraKontrolatzailea {
     @FXML
     private TableColumn<Paketea, String> entregaEginBeharDataColumn;
 
-
     public void initialize() {
         // Tablako zutabe bakoitza Paketea objetuko atributu bati esleitu.
         TableViewCreator.createTableView(Paketea.class, paketeTabla);

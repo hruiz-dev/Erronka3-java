@@ -84,7 +84,6 @@
                <children>
                   <AnchorPane prefHeight="0.0" prefWidth="0.0">
                      <children>
-                        <Label layoutX="23.0" layoutY="88.0" prefHeight="17.0" prefWidth="78.0" text="Id" />
                         <Label layoutX="23.0" layoutY="128.0" prefHeight="17.0" prefWidth="164.0" text="Entrega egin beharreko data" />
                         <Label layoutX="23.0" layoutY="168.0" prefHeight="17.0" prefWidth="78.0" text="Hartzailea" />
                         <Label layoutX="23.0" layoutY="207.0" prefHeight="17.0" prefWidth="78.0" text="Dimensioak" />
@@ -94,7 +93,7 @@
                         <Button layoutX="23.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#ezabatuPaketea" prefHeight="25.0" prefWidth="75.0" text="Ezabatu" />
                         <Button layoutX="114.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#gordePaketea" prefHeight="25.0" prefWidth="105.0" text="Gorde aldaketak" />
                         <Button layoutX="348.0" layoutY="577.0" minWidth="72.0" mnemonicParsing="false" onAction="#sortuPaketea" prefHeight="25.0" prefWidth="75.0" text="Berria" />
-                        <TextField fx:id="idTextArea" layoutX="212.0" layoutY="84.0" />
+                        <TextField fx:id="idTextArea" layoutX="212.0" layoutY="84.0" visible="false" />
                         <TextField fx:id="entregaDataTextField" layoutX="212.0" layoutY="124.0" />
                         <TextField fx:id="hartzaileaTextField" layoutX="212.0" layoutY="164.0" />
                         <TextField fx:id="dimentsioakTextField" layoutX="212.0" layoutY="203.0" />

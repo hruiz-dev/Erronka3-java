@@ -53,24 +53,16 @@ public class BanatzaileakKontrolatzailea {
     private ComboBox<String> filterCombox;
 
 
+    /**
+     * Metodo honek gure interfazea kargatzean honen komponeteak inizialalizatzen ditu
+     */
     public void initialize() {
+
         // Tablako zutabe bakoitza Paketea objetuko atributu bati esleitu.
         TableViewCreator.createTableView(Banatzailea.class, banatzaileakTaula);
-        // Pasahitza tablan ez ikusteko kolugnan erakustendena modifikatu
-        pasahitza.setCellFactory(column -> {
-            return new TableCell<Banatzailea, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
 
-                    if (item == null || empty) {
-                        setText(null);
-                    } else {
-                        setText(item.replaceAll(".", "*"));
-                    }
-                }
-            };
-        });
+        // Pasahitza tablan ez ikusteko kolugnan erakustendena modifikatu
+        banatzaileakTaula.getColumns().remove(pasahitza);
 
         tablaSortu();
     }
@@ -79,19 +71,23 @@ public class BanatzaileakKontrolatzailea {
      *Metodo honek datubasetik ateratako Banatzaileak Tablan bistarentzen ditu
      */
     public void tablaSortu () {
+        // Datu basetik datuak atera
         BanatzaileZerbitzua.updateBanatzaileakDB();
         List<Banatzailea> banatzaileak = Banatzailea.getBanatzaileak();
 
+        // Datuak Tablan bistaratu
         ObservableList<Banatzailea> data = FXCollections.observableArrayList(banatzaileak);
         banatzaileakTaula.setItems(data);
     }
 
     /**
-     * Metodo honek taulako lerro batean kilk egitean lerro arretako datuak textAreaetan bistaratzen ditu
+     * Metodo honek taulako lerro batean kilk egitean lerro orretatik datuak textAreaetan bistaratzen ditu
      */
     public void tablanAukeratu() {
+        // TAblako banatzailea atera
         Banatzailea banatzailea = banatzaileakTaula.getSelectionModel().getSelectedItem();
 
+        // Banatzailearen datuak textAreaetan sartu
         idTextArea.setText(String.valueOf(banatzailea.getId()));
         izenaTextArea.setText(banatzailea.getIzena());
         abizenaTextArea.setText(banatzailea.getAbizena());
@@ -102,8 +98,6 @@ public class BanatzaileakKontrolatzailea {
 
     }
 
-    // TODO: Datubasean trigger bat sortu Banatzailea ezabatzean honek esleituta dituen pakete guztien banatzailea id null jartzea, pakete historian ere bai
-
     /**
      * Metodo honek lehenik alerta bat sortzen du eta honek biezkoa jasotzen badu
      * datu basetik banatzailea ezabatzen du
@@ -113,6 +107,7 @@ public class BanatzaileakKontrolatzailea {
                 "Ziur zaude banatzailea ezabatu nahi duzula?",
                 "Ezabatzean, banatzailearen datu guztiak ezabatuko dira.");
 
+        //alertaren erantzunera itxaron
         alert.showAndWait();
         if (alert.getResult() == ButtonType.OK) {
             Banatzailea banatzailea = banatzaileakTaula.getSelectionModel().getSelectedItem();
@@ -131,9 +126,11 @@ public class BanatzaileakKontrolatzailea {
      * Metodo honek banatzailearen datu beriak artzen ditu textAretik eta hauek update baten bidez aktualizatu
      */
     public void gordeBanatzailea() {
+        // TextArea gutiak beteta dauden komprobatu
         if (!komprobatuTextAreak()) {
             return;
         }
+        // Banatzaile berria sortu datuekin
         Banatzailea banatzailea = new Banatzailea(
                 Integer.parseInt(idTextArea.getText()),
                 izenaTextArea.getText(),
@@ -153,7 +150,7 @@ public class BanatzaileakKontrolatzailea {
     }
 
     /**
-     * metodo honek textArea guztiak garbitzen ditu
+     * Metodo honek textArea guztiak garbitzen ditu
      */
     public void garbituTextAreak() {
         idTextArea.setText("");
@@ -197,6 +194,9 @@ public class BanatzaileakKontrolatzailea {
         erakutsiAlertPanelSucessfull(id + " zenbakidun banatzailea sortu da.");
     }
 
+    /**
+     * Metodo honek informazioa erakusteko panelaren x botoia sakatzean panela itxi egiten du
+     */
     public void itxiAlertPanel() {
         alertPanel.setVisible(false);
     }
@@ -241,12 +241,15 @@ public void bilatuBanatzaileak() {
     String filter = filterCombox.getValue();
     ArrayList<Banatzailea> emaitza;
 
+    // filtroa nuloa badago, Id erabili
     if (filter == null){
         filter = "Id";
     }
 
+    // Datuak filtratu
     emaitza = Filter.filtratu(Banatzailea.getBanatzaileak(), filter, bilatzailea);
 
+    // Emaitza taulan bistaratu
     ObservableList<Banatzailea> data = FXCollections.observableArrayList(emaitza);
     banatzaileakTaula.setItems(data);
 }
@@ -255,7 +258,6 @@ public void bilatuBanatzaileak() {
      * Metodo honek banatzailen datuak refreskatzen ditu datu basetik
      */
     public void updateBanatzailea() {
-        BanatzaileZerbitzua.updateBanatzaileakDB();
         tablaSortu();
     }
 

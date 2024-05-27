@@ -215,4 +215,5 @@ public class Paketea {
     public static void setPaketeak(ArrayList<Paketea> paketeak) {
         Paketea.paketeak = paketeak;
     }
+
 }

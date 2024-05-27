@@ -183,4 +183,5 @@ public class Banatzailea {
     public static void setBanatzaileak(ArrayList<Banatzailea> banatzaileak) {
         Banatzailea.banatzaileak = banatzaileak;
     }
+
 }
