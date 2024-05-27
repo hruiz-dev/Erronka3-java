@@ -13,10 +13,10 @@ public class Paketea {
     private Date entregaEginBeharData;
     private String hartzailea;
     private String dimentsioak;
-    private boolean entregatzen;
+    private boolean hauskorra;
     private String helburua;
     private String jatorria;
-    private boolean hauskorra;
+    private boolean entregatzen;
     private int banatzaileaId;
 
 

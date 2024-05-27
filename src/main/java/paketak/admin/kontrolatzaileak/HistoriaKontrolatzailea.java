@@ -55,21 +55,7 @@ public class HistoriaKontrolatzailea {
         // banatzaileakTabla dagokien propietateak esleitu
         TableViewCreator.createTableView(Banatzailea.class, banatzaileakTabla);
 
-        // pasahitzaBanatzailea osagaia eguneratzeko
-        pasahitzaBanatzailea.setCellFactory(column -> {
-            return new TableCell<Banatzailea, String>() {
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if (item == null || empty) {
-                        setText(null);
-                    } else {
-                        setText(item.replaceAll(".", "*"));
-                    }
-                }
-            };
-        });
+        banatzaileakTabla.getColumns().remove(pasahitzaBanatzailea);
 
         // paketeakTabla-ko entregaDataPaketea osagaia eguneratzeko
         entregaDataPaketea.setCellValueFactory(cellData -> {
