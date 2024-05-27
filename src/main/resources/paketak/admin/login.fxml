@@ -29,6 +29,11 @@
                   <TextField fx:id="erabiltzaileaText" layoutX="24.0" layoutY="88.0" prefHeight="25.0" prefWidth="202.0" promptText="Erabiltzailea" styleClass="textField" stylesheets="@../../styles.css" />
                   <PasswordField fx:id="pasahitzaText" layoutX="24.0" layoutY="163.0" onKeyPressed="#enterSakatu" prefHeight="25.0" prefWidth="202.0" promptText="pasahitza" />
                   <Button layoutX="20.0" layoutY="295.0" mnemonicParsing="false" onAction="#hasiSaioa" prefHeight="46.0" prefWidth="210.0" text="Hasi saioa" />
+                  <Label fx:id="alertlabel" layoutX="24.0" layoutY="241.0" textFill="RED">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane layoutX="242.0" layoutY="5.0" prefHeight="400.0" prefWidth="351.0">
