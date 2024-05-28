@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="745.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.HasieraKontrolatzailea">
+<VBox prefHeight="745.0" prefWidth="1216.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paketak.admin.kontrolatzaileak.HasieraKontrolatzailea">
    <children>
       <GridPane alignment="CENTER">
          <columnConstraints>
@@ -32,7 +39,7 @@
                   </ImageView>
                </graphic>
             </Label>
-            <Label fx:id="inzidentziakKont" text="1" textFill="#404040" GridPane.columnIndex="1">
+            <Label fx:id="inzidentziakKont" accessibleHelp="Inzidentziak" accessibleText="Inzidentziak" text="1" textFill="#404040" GridPane.columnIndex="1">
                <font>
                   <Font size="58.0" />
                </font>
