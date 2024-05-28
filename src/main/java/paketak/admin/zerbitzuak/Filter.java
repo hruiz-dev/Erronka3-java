@@ -15,7 +15,7 @@ public class Filter {
     /**
      * Funtzio honek objetu lista bat pasatuta filter Aldagaieko eremuan komparazioak egiten ditu, hemen komprobatzen du,
      * filter eremuko aldagaiak kontenitzen duen bilatzailea aldagaieko baloa, hau orrela bada emaitza zerendara gehitzen da eta
-     * bueltatzen du.
+     * bueltatzen du. Filtratzeko erabiliko den izena BantzaileaId bada contains beharrean berdina den konprobatuko du, zehatzagoa izan dedin.
      * <strong>Importatea: hemandoko objetuak geter metodo publiko eduki behar du bestela errorea emango du</strong>
      * @param objetuak Lista bat operazioa egiteko erabiliko diren objetuekin
      * @param filter Filtrotzeko erabiliko den aldagaiaren izena
@@ -46,8 +46,15 @@ public class Filter {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     fieldValue = formatter.format((Date) fieldValueObj);
                 }
-                if (fieldValue != null && fieldValue.contains(bilatzailea)) {
-                    emaitza.add(objetua);
+                if(filter.equals("BanatzaileaId")){
+                    if (fieldValue != null && fieldValue.equals(bilatzailea)) {
+                        emaitza.add(objetua);
+                    }
+                }
+                else {
+                    if (fieldValue != null && fieldValue.contains(bilatzailea)) {
+                        emaitza.add(objetua);
+                    }
                 }
 
             }
