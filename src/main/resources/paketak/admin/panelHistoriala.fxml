@@ -23,12 +23,66 @@
    <children>
       <AnchorPane prefHeight="926.0" prefWidth="1495.0">
          <children>
-            <Label text="Paketeak">
+            <Label layoutX="14.0" text="Banatzaileak">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <AnchorPane layoutY="62.0" prefHeight="872.0" prefWidth="890.0">
+            <ToolBar layoutX="14.0" layoutY="70.0" prefHeight="41.0" prefWidth="601.0">
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+               <items>
+                  <TextField fx:id="bilatzaileaBanatzailea" prefHeight="25.0" prefWidth="144.0" />
+                  <Button mnemonicParsing="false" onAction="#bilatuBanatzaileak" prefHeight="26.0" prefWidth="42.0">
+                     <graphic>
+                        <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@irudiak/bilatu.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ComboBox fx:id="filterComboxBanatzailea" prefWidth="150.0" promptText="Id">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Id" />
+                           <String fx:value="Izena" />
+                           <String fx:value="Abizena" />
+                           <String fx:value="Erabiltzailea" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <Button mnemonicParsing="false" onAction="#updateBanatzailea">
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@irudiak/reload.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ToolBar>
+            <TableView fx:id="banatzaileakTabla" layoutX="14.0" layoutY="109.0" onMouseClicked="#tablanAukeratu" prefHeight="819.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn fx:id="idBanatzailea" prefWidth="58.0" text="Id " />
+                  <TableColumn fx:id="izenaBanatzailea" prefWidth="58.0" text="Izena" />
+                  <TableColumn fx:id="abizenaBanatzailea" prefWidth="73.0" text="Abizena" />
+                  <TableColumn fx:id="erabiltzaileaBanatzailea" prefWidth="93.0" text="Erabiltzailea" />
+                  <TableColumn fx:id="pasahitzaBanatzailea" prefWidth="79.0" text="Pasahitza" />
+                  <TableColumn fx:id="entregakBanatzailea" minWidth="0.0" prefWidth="74.0" text="Entregak" />
+                  <TableColumn fx:id="beranduEntregakBanatzailea" prefWidth="140.0" text="Berandu entregatuak" />
+               </columns>
+            </TableView>
+            <AnchorPane layoutX="615.0" layoutY="70.0" prefHeight="872.0" prefWidth="890.0">
                <children>
                   <AnchorPane layoutY="40.0" prefHeight="813.0" prefWidth="890.0">
                      <children>
@@ -93,69 +147,11 @@
                   </ToolBar>
                </children>
             </AnchorPane>
-            <Label layoutX="890.0" layoutY="-8.0" text="Banatzaileak">
+            <Label layoutX="615.0" text="Paketeak">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="890.0" layoutY="60.0" prefHeight="860.0" prefWidth="603.0">
-               <children>
-                  <TableView fx:id="banatzaileakTabla" layoutX="2.0" layoutY="40.0" onMouseClicked="#tablanAukeratu" prefHeight="832.0" prefWidth="600.0">
-                     <columns>
-                        <TableColumn fx:id="idBanatzailea" prefWidth="58.0" text="Id " />
-                        <TableColumn fx:id="izenaBanatzailea" prefWidth="58.0" text="Izena" />
-                        <TableColumn fx:id="abizenaBanatzailea" prefWidth="73.0" text="Abizena" />
-                        <TableColumn fx:id="erabiltzaileaBanatzailea" prefWidth="93.0" text="Erabiltzailea" />
-                        <TableColumn fx:id="pasahitzaBanatzailea" prefWidth="79.0" text="Pasahitza" />
-                        <TableColumn fx:id="entregakBanatzailea" minWidth="0.0" prefWidth="74.0" text="Entregak" />
-                        <TableColumn fx:id="beranduEntregakBanatzailea" prefWidth="140.0" text="Berandu entregatuak" />
-                     </columns>
-                  </TableView>
-                  <ToolBar prefHeight="41.0" prefWidth="601.0">
-                     <contextMenu>
-                        <ContextMenu>
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Unspecified Action" />
-                           </items>
-                        </ContextMenu>
-                     </contextMenu>
-                     <items>
-                        <TextField fx:id="bilatzaileaBanatzailea" prefHeight="25.0" prefWidth="144.0" />
-                        <Button mnemonicParsing="false" onAction="#bilatuBanatzaileak" prefHeight="26.0" prefWidth="42.0">
-                           <graphic>
-                              <ImageView fitHeight="21.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@irudiak/bilatu.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <ComboBox fx:id="filterComboxBanatzailea" prefWidth="150.0" promptText="Id">
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="Id" />
-                                 <String fx:value="Izena" />
-                                 <String fx:value="Abizena" />
-                                 <String fx:value="Erabiltzailea" />
-                              </FXCollections>
-                           </items>
-                        </ComboBox>
-                        <Button mnemonicParsing="false" onAction="#updateBanatzailea">
-                           <graphic>
-                              <ImageView fitHeight="23.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@irudiak/reload.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </items>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ToolBar>
-               </children>
-            </AnchorPane>
          </children>
       </AnchorPane>
    </children>
