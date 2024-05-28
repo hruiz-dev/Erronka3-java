@@ -15,7 +15,7 @@ public class PaketeHistorialaZerbitzua {
     /**
      * Metodo honek datu basean dauden pakete historialak kargatzen ditu
      */
-    public static void uppdatePaketeHistorialaDB() {
+    public static void updatePaketeHistorialaDB() {
 
         ArrayList<PaketeaHistoriala> zerrenda = new ArrayList<PaketeaHistoriala>();
         ResultSet emaitza = mysql.createQuery("SELECT * FROM `Pakete_Historiala`");

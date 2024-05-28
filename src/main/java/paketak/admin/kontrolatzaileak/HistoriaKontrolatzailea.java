@@ -189,7 +189,7 @@ public class HistoriaKontrolatzailea {
      * Metodo honek Paketeak tablako datuak aktualizatzen ditu
      */
     public void paketeakTablaSortu() {
-        PaketeHistorialaZerbitzua.uppdatePaketeHistorialaDB();
+        PaketeHistorialaZerbitzua.updatePaketeHistorialaDB();
         List<PaketeaHistoriala> paketeak = PaketeaHistoriala.getPaketeak();
 
         ObservableList<PaketeaHistoriala> data = FXCollections.observableArrayList(paketeak);
