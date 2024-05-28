@@ -1,5 +1,0 @@
-#F22233 Rojo claro
-#BF212E Rojo Oscuro
-#419FD9 Azul Claro
-#590E0E Azul Oscuro
-#FFFFFF

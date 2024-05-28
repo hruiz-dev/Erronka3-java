@@ -1,6 +1,7 @@
 package paketak.admin.kontrolatzaileak;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -17,6 +18,8 @@ public class loginKontrolatzailea {
     @FXML
     private PasswordField pasahitzaText;
 
+    @FXML
+    private Label alertlabel;
     /**
      * Metodo honek textfield-etan sartutako erabiltzailea eta pasahitza konprobatzen du.
      * eta hauek zuzenak badira panel prinzipala kargatu
@@ -29,7 +32,7 @@ public class loginKontrolatzailea {
             a.changeScene("dashboard.fxml");
 
         } else {
-            System.out.println("Erabiltzaile edo pasahitza okerra");
+            alertlabel.setText("Erabiltzaile edo pasahitza okerra");
         }
     }
 
