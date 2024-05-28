@@ -14,10 +14,8 @@ Programa hau egiteko tengonolo hauek erabili ditugu:
 
 ## Nola jarri martxan
 
-Programa hau martxan jartzeko lehenik [erronka3-web](https://github.com/hruiz-dev/Erronka3-webs) docker-compose-ko mysql kontenedorea martxan eduki behar da aplikazioa erabili nahi den ordenagailuan.
+Programa hau martxan jartzeko lehenik [erronka3-web](https://github.com/hruiz-dev/Erronka3-web) docker-compose-ko mysql kontenedorea martxan eduki behar da aplikazioa erabili nahi den ordenagailuan.
 
-JDK 21 edo bertsi berriagoa erabili beharra dago aplikazioak funtziona dezan bestela ez da abiaraziko.
+JDK 21 edo bertsio berriagoa erabili beharra dago aplikazioak funtziona dezan bestela ez da abiaraziko.
 
-- Lehen hauekera, repositorio onetatik reselese apartaduan .exe fitxategia deskargatu eta ejekutatu.
-
-- Bigarren haukera proiektu guztia clonatu git erabiliz eta java bidez main.class fitxategia exekutatu.
+martxan jartzeko modua deskargatu proiektua `git clone https://github.com/hruiz-dev/Erronka3-java` komandoarekin eta java editore batekin erike eta ejekutatu edo kompilatu
