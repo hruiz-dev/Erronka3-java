@@ -18,4 +18,9 @@ Programa hau martxan jartzeko lehenik [erronka3-web](https://github.com/hruiz-de
 
 JDK 21 edo bertsio berriagoa erabili beharra dago aplikazioak funtziona dezan bestela ez da abiaraziko.
 
-martxan jartzeko modua deskargatu proiektua `git clone https://github.com/hruiz-dev/Erronka3-java` komandoarekin eta java editore batekin ireki maveneko dependizia guztiak intalatu `mvc iinstall` komandoarekin eta proiektua ejekutatu
+martxan jartzeko modua deskargatu proiektua `git clone https://github.com/hruiz-dev/Erronka3-java` komandoarekin eta java editore batekin ireki maveneko dependizia guztiak intalatu `mvc iinstall` komandoarekin eta proiektua #ejekutatu
+
+### Reselease martxan jartzeko modua:
+
+Deskargatutako zip-a deskonprimitu eta gero martxanjarri.vbs artxiboa ejekutatu.
+
